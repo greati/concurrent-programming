@@ -19,8 +19,8 @@ EXEC = multimat
 
 
 ### executable target
-main: bin Mat.o main.o
-	$(CXX) $(BINDIR)Mat.o $(BINDIR)main.o \
+main: bin Mat.o multimat.o
+	$(CXX) $(BINDIR)Mat.o $(BINDIR)multimat.o \
 	-o $(EXEC) $(OPTIONSCXX)
 
 ### bin folder (created only if it doesnt exist)
@@ -30,7 +30,7 @@ bin:
 %.o: $(SRCDIR)%.cpp
 	$(CXX) -c $< -o $(BINDIR)$@ $(OPTIONSCXX) $(DECLRDIR)
 
-main.o: $(SRCDIR)main.cpp
+main.o: $(SRCDIR)multimat.cpp
 Mat.o: $(SRCDIR)Mat.cpp
 
 

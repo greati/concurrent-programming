@@ -18,6 +18,9 @@ void Mat::compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, const i
 
 /* Sequential multiplication */
 void Mat::sequential_mult(const Matrix& A, const Matrix& B, Matrix& C) {
+	C.resize(A.size());
+	for (auto& c : C)
+		c.resize(B[0].size());
 	for (unsigned int i = 0; i < C.size(); ++i)
 		Mat::compute_mult_line(A, B, C, i);
 }

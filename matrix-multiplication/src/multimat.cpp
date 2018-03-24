@@ -17,7 +17,12 @@ int main(int argc, char const *argv[])
 	Mat::read_matrix(a_filename.str(), a);
 	Mat::read_matrix(b_filename.str(), b);
 
-	Mat::print_matrix(a);
+	Matrix C;
+
+	Mat::sequential_mult(a,b,C);
+
+	Mat::print_matrix(C);
+	
 
 	return EXIT_SUCCESS;
 }
