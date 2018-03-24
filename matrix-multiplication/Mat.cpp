@@ -7,9 +7,9 @@ const int Mat::max_n = 2048;
 
 /* Compute line i of the result matrix. */
 void Mat::compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, const int & i) {
-	for (int k = 0; k < B[0].size(); ++k) {
+	for (unsigned int k = 0; k < B[0].size(); ++k) {
 		int sum = 0;
-		for (int m = 0; m < A[i].size(); ++m) {
+		for (unsigned int m = 0; m < A[i].size(); ++m) {
 			sum += A[i][m]*B[m][k];
 		}
 		C[i][k] = sum;
@@ -18,14 +18,14 @@ void Mat::compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, const i
 
 /* Sequential multiplication */
 void Mat::sequential_mult(const Matrix& A, const Matrix& B, Matrix& C) {
-	for (int i = 0; i < C.size(); ++i)
+	for (unsigned int i = 0; i < C.size(); ++i)
 		Mat::compute_mult_line(A, B, C, i);
 }
 
 /* Concurrent multiplication */
 void Mat::concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C) {
 	std::vector<std::thread> threadList;
-	for (int i = 0; i < C.size(); ++i)
+	for (unsigned int i = 0; i < C.size(); ++i)
 		threadList.push_back(std::thread(compute_mult_line, std::ref(A), std::ref(B), std::ref(C), i));
 	for (auto& t : threadList)
 		t.join();
@@ -50,7 +50,7 @@ void Mat::read_arguments(const char* n_arg, const char* method_arg, int& n, char
 
 void Mat::read_matrix(std::string filename, Matrix& matrix)
 {
-	auto file = std::ifstream(filename);
+	std::ifstream file (filename);
 
 	// ignore header with matrix dimensions
 	int n, m;
