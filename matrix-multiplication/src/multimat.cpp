@@ -1,3 +1,5 @@
+#include <iostream>
+#include <chrono>
 #include "Mat.h"
 
 using Mat::Matrix;
@@ -18,11 +20,14 @@ int main(int argc, char const *argv[])
 	Mat::read_matrix(b_filename.str(), b);
 
 	Matrix C;
-
+ 	auto start = std::chrono::steady_clock::now();
 	Mat::sequential_mult(a,b,C);
+	auto end = std::chrono::steady_clock::now();
+
+	std::chrono::duration<double, std::milli> time(end-start);
+	std::cout << time.count() << std::endl;
 
 	Mat::print_matrix(C);
-	
 
 	return EXIT_SUCCESS;
 }
