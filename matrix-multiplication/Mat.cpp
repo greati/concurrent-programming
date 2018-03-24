@@ -5,27 +5,28 @@ using Mat::Matrix;
 const int Mat::min_n = 4;
 const int Mat::max_n = 2048;
 
-/* Multiplies line i of a nxm matrix by column j of a nxp matrix. **/
-void Mat::mult_line_column(const Matrix& A, const Matrix& B, Matrix& C, const int & n, const int & i, const int & j) {
-	int sum = 0;
-	for (int k = 0; k < n; ++k) 
-		sum += A[i][k] * B[k][j];
-	C[i][j] = sum;
+/* Compute line i of the result matrix. */
+void Mat::compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, const int & i) {
+	for (int k = 0; k < B[0].size(); ++k) {
+		int sum = 0;
+		for (int m = 0; m < A[i].size(); ++m) {
+			sum += A[i][m]*B[m][k];
+		}
+		C[i][k] = sum;
+	}
 }
 
 /* Sequential multiplication */
-void Mat::sequential_mult(const Matrix& A, const Matrix& B, Matrix& C, const int & m, const int & n, const int & p) {
-	for (int i = 0; i < m; ++i)
-		for (int j = 0; j < p; ++j)
-			Mat::mult_line_column(A, B, C, n, i, j);
+void Mat::sequential_mult(const Matrix& A, const Matrix& B, Matrix& C) {
+	for (int i = 0; i < C.size(); ++i)
+		Mat::compute_mult_line(A, B, C, i);
 }
 
 /* Concurrent multiplication */
-void Mat::concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C, const int & m, const int & n, const int & p) {
+void Mat::concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C) {
 	std::vector<std::thread> threadList;
-	for (int i = 0; i < m; ++i)
-		for (int j = 0; j < p; ++j) 
-			threadList.push_back(std::thread(mult_line_column, std::ref(A), std::ref(B), std::ref(C), n, i, j));
+	for (int i = 0; i < C.size(); ++i)
+		threadList.push_back(std::thread(compute_mult_line, std::ref(A), std::ref(B), std::ref(C), i));
 	for (auto& t : threadList)
 		t.join();
 }
