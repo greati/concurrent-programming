@@ -17,11 +17,14 @@ BINDIR = ./bin/
 
 EXEC = multimat
 
-
 ### executable target
 main: bin Mat.o multimat.o
 	$(CXX) $(BINDIR)Mat.o $(BINDIR)multimat.o \
 	-o $(EXEC) $(OPTIONSCXX)
+
+tests: bin Mat.o perftests.o
+	$(CXX) $(BINDIR)Mat.o $(BINDIR)perftests.o \
+	-o perftests $(OPTIONSCXX)
 
 ### bin folder (created only if it doesnt exist)
 bin:
@@ -32,6 +35,7 @@ bin:
 
 main.o: $(SRCDIR)multimat.cpp
 Mat.o: $(SRCDIR)Mat.cpp
+perftests.o: $(SRCDIR)perftests.cpp
 
 
 ### clear objects & executable

@@ -84,3 +84,30 @@ void Mat::print_matrix(const Matrix& matrix)
 		std::cout << std::endl;
 	}
 }
+
+void Mat::perf_mult_with_stats(const Matrix& A, const Matrix& B, Matrix& C, 
+        const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier, 
+        std::map<std::string, double>& stats) {
+
+    double average = 0.0, maximum = 0.0, minimum = 0.0, stdeviation = 0.0;
+    
+    for (int i = 1; i <= nrepeat; ++i) {
+        auto start = std::chrono::steady_clock::now();
+        multiplier(A, B, C); 
+        auto end = std::chrono::steady_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        double elapsed = duration.count();
+        average = 1/i * ((i-1)*average + elapsed);
+        maximum = std::max(maximum, elapsed);
+        minimum = std::max(minimum, elapsed);
+        stdeviation = std::sqrt(1/i*(std::pow(stdeviation, 2)*(i-1) + std::pow((elapsed - average),2)));
+    }
+    
+    // Compute standard deviation
+
+    stats["average"] = average;
+    stats["maximum"] = maximum;
+    stats["minimum"] = minimum;
+    stats["stdeviation"] = stdeviation;
+
+}
