@@ -29,6 +29,7 @@ int main(int argc, char const *argv[])
 	if (write) {
 		std::ofstream result_file(Mat::get_filename("C", n));
 		Mat::print_matrix(c, result_file);
+		result_file.close();
 	}
 
 	return EXIT_SUCCESS;
