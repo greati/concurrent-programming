@@ -14,25 +14,28 @@ OPTIONSCXX = $(STD) $(WARNING) $(THREAD_FLAG)
 DECLRDIR = -I ./include
 SRCDIR = ./src/
 BINDIR = ./bin/
+BUILDDIR = ./build/
 
 MULT_EXEC = multimat
 TESTS_EXEC = perftests
 
 ### executable targets
-main: bin Mat.o multimat.o
-	$(CXX) $(BINDIR)Mat.o $(BINDIR)multimat.o \
-	-o $(MULT_EXEC) $(OPTIONSCXX)
+main: bin build Mat.o multimat.o
+	$(CXX) $(BUILDDIR)Mat.o $(BUILDDIR)multimat.o \
+	-o $(BINDIR)$(MULT_EXEC) $(OPTIONSCXX)
 
-tests: bin Mat.o perftests.o
-	$(CXX) $(BINDIR)Mat.o $(BINDIR)perftests.o \
-	-o $(TESTS_EXEC) $(OPTIONSCXX)
+tests: bin build Mat.o perftests.o
+	$(CXX) $(BUILDDIR)Mat.o $(BUILDDIR)perftests.o \
+	-o $(BINDIR)$(TESTS_EXEC) $(OPTIONSCXX)
 
 ### bin folder (created only if it doesnt exist)
 bin:
 	mkdir -p ./bin/
+build:
+	mkdir -p ./build/
 
 %.o: $(SRCDIR)%.cpp
-	$(CXX) -c $< -o $(BINDIR)$@ $(OPTIONSCXX) $(DECLRDIR)
+	$(CXX) -c $< -o $(BUILDDIR)$@ $(OPTIONSCXX) $(DECLRDIR)
 
 Mat.o: $(SRCDIR)Mat.cpp
 multimat.o: $(SRCDIR)multimat.cpp
@@ -40,7 +43,6 @@ perftests.o: $(SRCDIR)perftests.cpp
 
 
 ### clear objects & executables
-clean: bin
-	$(DEL) ./$(MULT_EXEC)
-	$(DEL) ./$(TESTS_EXEC)
-	$(DEL) $(BINDIR)*.o
+clean: bin build
+	$(DEL) -rf $(BINDIR)
+	$(DEL) -rf $(BUILDDIR)
