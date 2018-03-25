@@ -12,11 +12,11 @@
 #include <cmath>
 
 namespace Mat {
-    
-        enum ExecType {
-            SEQUENTIAL = 0,
-            CONCURRENT = 1  
-        };
+	
+	enum ExecType {
+		SEQUENTIAL = 0,
+		CONCURRENT = 1  
+	};
 
         struct PerfStats {
             double average = 0.0, maximum = 0.0, minimum = 0.0, stdeviation = 0.0;
@@ -35,15 +35,15 @@ namespace Mat {
 	extern const int min_n;
 	extern const int max_n;
 	typedef std::vector<std::vector<int>> Matrix;
-	// mxn nxp
 
-	void compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, 
-		const int & i);
+	void compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, const int & i);
 	void sequential_mult(const Matrix& A, const Matrix& B, Matrix& C);
 	void concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C);
 
-	void read_arguments(const char* n_arg, const char* method_arg, int& n, char& method);
+	void read_arguments(int argc, char const *argv[], int& n, char& method, bool& write);
+	std::string get_filename(std::string matrix_name, int n);
 	void read_matrix(std::string filename, Matrix& matrix);
+
 	void print_matrix(const Matrix& matrix);
 
         /* Multiplies AxB n times, recording
@@ -57,7 +57,7 @@ namespace Mat {
         const PerfStats& mult_perf_stats(const Matrix&, const Matrix&, Matrix&, const int &, 
                 std::function<void(const Matrix&, const Matrix&, Matrix&)>);
 
-
+	void print_matrix(const Matrix& matrix, std::ostream& output=std::cout);
 }
 
 #endif

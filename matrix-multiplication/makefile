@@ -15,16 +15,17 @@ DECLRDIR = -I ./include
 SRCDIR = ./src/
 BINDIR = ./bin/
 
-EXEC = multimat
+MULT_EXEC = multimat
+TESTS_EXEC = perftests
 
-### executable target
+### executable targets
 main: bin Mat.o multimat.o
 	$(CXX) $(BINDIR)Mat.o $(BINDIR)multimat.o \
-	-o $(EXEC) $(OPTIONSCXX)
+	-o $(MULT_EXEC) $(OPTIONSCXX)
 
 tests: bin Mat.o perftests.o
 	$(CXX) $(BINDIR)Mat.o $(BINDIR)perftests.o \
-	-o perftests $(OPTIONSCXX)
+	-o $(TESTS_EXEC) $(OPTIONSCXX)
 
 ### bin folder (created only if it doesnt exist)
 bin:
@@ -33,12 +34,13 @@ bin:
 %.o: $(SRCDIR)%.cpp
 	$(CXX) -c $< -o $(BINDIR)$@ $(OPTIONSCXX) $(DECLRDIR)
 
-main.o: $(SRCDIR)multimat.cpp
 Mat.o: $(SRCDIR)Mat.cpp
+multimat.o: $(SRCDIR)multimat.cpp
 perftests.o: $(SRCDIR)perftests.cpp
 
 
-### clear objects & executable
+### clear objects & executables
 clean: bin
-	$(DEL) ./$(EXEC)
+	$(DEL) ./$(MULT_EXEC)
+	$(DEL) ./$(TESTS_EXEC)
 	$(DEL) $(BINDIR)*.o

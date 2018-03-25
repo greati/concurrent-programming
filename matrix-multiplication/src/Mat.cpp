@@ -22,23 +22,31 @@ void Mat::sequential_mult(const Matrix& A, const Matrix& B, Matrix& C) {
 	C.resize(A.size());
 	for (auto& c : C)
             c.resize(B[0].size());
+	
 	for (unsigned int i = 0; i < C.size(); ++i)
             Mat::compute_mult_line(A, B, C, i);
 }
 
 /* Concurrent multiplication */
 void Mat::concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C) {
-	std::vector<std::thread> threadList;
+	C.resize(A.size());
+	for (auto& c : C)
+		c.resize(B[0].size());
+
+	std::vector<std::thread> thread_list;
 	for (unsigned int i = 0; i < C.size(); ++i)
-		threadList.push_back(std::thread(compute_mult_line, std::ref(A), std::ref(B), std::ref(C), i));
-	for (auto& t : threadList)
+		thread_list.push_back(std::thread(compute_mult_line, std::ref(A), std::ref(B), std::ref(C), i));
+	for (auto& t : thread_list)
 		t.join();
 }
 
-void Mat::read_arguments(const char* n_arg, const char* method_arg, int& n, char& method)
+void Mat::read_arguments(int argc, char const *argv[], int& n, char& method, bool& write)
 {
-	std::istringstream n_stream(n_arg);
-	std::istringstream method_stream(method_arg);
+	if (argc < 3 )
+		throw std::invalid_argument("missing arguments");
+
+	std::istringstream n_stream(argv[1]);
+	std::istringstream method_stream(argv[2]);
 	if (!(n_stream >> n) || !(method_stream >> method))
 		throw std::invalid_argument("matrix dimension or processing method not valid");
 
@@ -49,14 +57,28 @@ void Mat::read_arguments(const char* n_arg, const char* method_arg, int& n, char
 		throw std::invalid_argument(std::string("invalid processing method ")+method);
 
 	if (n < min_n || n > max_n)
-		throw std::invalid_argument("missing matrix of size "+std::to_string(n));
+		throw std::invalid_argument("matrix size "+std::to_string(n)+" out of range");
+
+	if (argc > 3) {
+		std::istringstream write_stream(argv[3]);
+		if (!(write_stream >> write))
+			throw std::invalid_argument("'write' argument provided is not valid");
+	} else {
+		write = true;
+	}
+
+}
+
+std::string Mat::get_filename(std::string matrix_name, int n) {
+	std::ostringstream filename;
+	filename << "Matrizes/" << matrix_name << n << "x" << n << ".txt";
+	return filename.str();
 }
 
 void Mat::read_matrix(std::string filename, Matrix& matrix)
 {
 	std::ifstream file (filename);
 
-	// ignore header with matrix dimensions
 	int n, m;
 	file >> n >> m;
 
@@ -73,23 +95,24 @@ void Mat::read_matrix(std::string filename, Matrix& matrix)
 	}
 }
 
-void Mat::print_matrix(const Matrix& matrix)
+void Mat::print_matrix(const Matrix& matrix, std::ostream& output)
 {
+	output << matrix.size() << " " << matrix[0].size() << std::endl;
 	for (auto i = matrix.begin(); i != matrix.end(); ++i) {
 		for (auto j = i->begin(); j != i->end(); ++j) {
 			if (j+1 != i->end())
-				std::cout << *j << " ";
+				output << *j << " ";
 			else 
-				std::cout << *j;
+				output << *j;
 		}
-		std::cout << std::endl;
+		output << std::endl;
 	}
 }
 
 const PerfStats& Mat::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& C, 
         const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier) {
 
-    double average = 0.0, maximum = 0.0, minimum = 0.0, stdeviation = 0.0;
+    double average = 0.0, maximum = 0.0, minimum = 0.0, std_deviation = 0.0;
     
     PerfStats * p = new PerfStats;//{average, maximum, minimum, stdeviation};
 
@@ -103,13 +126,13 @@ const PerfStats& Mat::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& 
         average = 1/i * ((i-1)*average + elapsed);
         maximum = std::max(maximum, elapsed);
         minimum = std::max(minimum, elapsed);
-        stdeviation = std::sqrt(1/i*(std::pow(stdeviation, 2)*(i-1) + std::pow((elapsed - average),2)));
+        std_deviation = std::sqrt(1/i*(std::pow(std_deviation, 2)*(i-1) + std::pow((elapsed - average),2)));
     }
 
     p->average = average;
     p->maximum = maximum;
     p->minimum = minimum;
-    p->stdeviation = stdeviation;
+    p->stdeviation = std_deviation;
  
     return (*p);
 }
