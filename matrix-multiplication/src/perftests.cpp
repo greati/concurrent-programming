@@ -7,34 +7,32 @@ using Mat::PerfStats;
 
 int main(int argn, char * args[]) {
 
-    if (argn < 2) {
-        std::cout << "Informe o caminho do arquivo de resultados." << std::endl;
-        return 1;
-    }
+    if (argn < 2)
+        throw std::invalid_argument("missing results file argument");
 
-    int reps = 20;
+    int reps = 1;
 
-    std::ofstream ofs;
-    ofs.open(args[1], std::ios::app);
-    ofs << "n" << " " << "method" << " " << "avg" << " " << "max" << " " << "min" << " " << "std" << std::endl;
+    std::ofstream results;
+    results.open(args[1], std::ios::app);
+    results << "n" << " " << "method" << " " << "avg" << " " << "max" << " " << "min" << " " << "std" << std::endl;
 
-    for (int i = 4; i < 2048; i = (i << 1)) {
+    for (int i = 4; i < 32; i = (i << 1)) {
         std::cout << "Starting for N = " << i << std::endl;
-        std::cout << "-- Reading matrices..." << i << std::endl;
+        std::cout << "-- Reading matrices..." << std::endl;
 
-	Matrix a, b, c;
-	Mat::read_matrix(Mat::get_filename("A", i), a);
-	Mat::read_matrix(Mat::get_filename("B", i), b);
+    	Matrix a, b, c;
+    	Mat::read_matrix(Mat::get_filename("A", i), a);
+    	Mat::read_matrix(Mat::get_filename("B", i), b);
         
-        std::cout << "-- Multiplying sequential..." << i << std::endl;
+        std::cout << "-- Multiplying sequential..." << std::endl;
         PerfStats seqStats = Mat::mult_perf_stats(a, b, c, reps, Mat::sequential_mult);
-        std::cout << "-- Multiplying concurrent..." << i << std::endl;
+        std::cout << "-- Multiplying concurrent..." << std::endl;
         PerfStats concStats = Mat::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
 
-        std::cout << "-- Writing to file..." << i << std::endl;
-        ofs << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
-        ofs << std::to_string(i) << " C " << concStats.tostring() << std::endl;
-        ofs.close();
+        std::cout << "-- Writing to file..." << std::endl;
+        results << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
+        results << std::to_string(i) << " C " << concStats.tostring() << std::endl;
+        results.close();
 
         std::cout << "-- Done." << std::endl;
     }
