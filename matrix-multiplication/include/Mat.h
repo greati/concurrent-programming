@@ -51,7 +51,7 @@ namespace Mat {
      * @param   C       Resulting nxn matrix.
      * @param   nrepeat Number of repetitions.
      * */
-    const PerfStats& mult_perf_stats(const Matrix&, const Matrix&, Matrix&, const int &, 
+    PerfStats mult_perf_stats(const Matrix&, const Matrix&, Matrix&, const int &, 
             std::function<void(const Matrix&, const Matrix&, Matrix&)>);
 
 	void print_matrix(const Matrix& matrix, std::ostream& output=std::cout);
