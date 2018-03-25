@@ -38,21 +38,27 @@ void Mat::concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C) {
 		t.join();
 }
 
-void Mat::read_arguments(int argc, char const *argv[], int& n, char& method, bool& write)
+void Mat::read_arguments(int argc, char const *argv[], int& n, Mat::ExecType& method, bool& write)
 {
 	if (argc < 3 )
 		throw std::invalid_argument("missing arguments");
 
+	char method_char;
 	std::istringstream n_stream(argv[1]);
 	std::istringstream method_stream(argv[2]);
-	if (!(n_stream >> n) || !(method_stream >> method))
+	if (!(n_stream >> n) || !(method_stream >> method_char))
 		throw std::invalid_argument("matrix dimension or processing method not valid");
 
 	if ((n & (n-1)) != 0)
 		throw std::invalid_argument("matrix dimension "+std::to_string(n)+" not a power of 2");
 
-	if (method != 'S' && method != 'C')
-		throw std::invalid_argument(std::string("invalid processing method ")+method);
+	method_char = toupper(method_char);
+	if (method_char == 'S')
+		method = SEQUENTIAL;
+	else if (method_char == 'C')
+		method = CONCURRENT;
+	else
+		throw std::invalid_argument(std::string("invalid processing method ")+method_char);
 
 	if (n < min_n || n > max_n)
 		throw std::invalid_argument("matrix size "+std::to_string(n)+" out of range");
