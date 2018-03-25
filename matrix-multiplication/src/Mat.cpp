@@ -75,14 +75,19 @@ void Mat::read_arguments(int argc, char const *argv[], int& n, Mat::ExecType& me
 
 std::string Mat::get_filename(std::string matrix_name, int n) {
 	std::ostringstream filename;
-	filename << "../Matrizes/" << matrix_name << n << "x" << n << ".txt";
+	filename << "Matrizes/" << matrix_name << n << "x" << n << ".txt";
 	return filename.str();
 }
 
 void Mat::read_matrix(std::string filename, Matrix& matrix)
 {
 	std::ifstream file (filename);
+	if (!file.good())
+		file = std::ifstream("../"+filename);
 
+	if (!file.good())
+		throw std::ifstream::failure("failed to read file " + filename);
+	
 	int n, m;
 	file >> n >> m;
 
