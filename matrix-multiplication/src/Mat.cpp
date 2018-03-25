@@ -113,12 +113,12 @@ void Mat::print_matrix(const Matrix& matrix, std::ostream& output)
 	}
 }
 
-const PerfStats& Mat::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& C, 
+PerfStats Mat::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& C, 
         const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier) {
 
     double average = 0.0, maximum = 0.0, minimum = 100000, std_deviation = 0.0;
     
-    PerfStats * p = new PerfStats;//{average, maximum, minimum, stdeviation};
+    PerfStats p;
 
     for (int i = 1; i <= nrepeat; ++i) {
         auto start = std::chrono::steady_clock::now();
@@ -126,17 +126,17 @@ const PerfStats& Mat::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& 
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> duration = end - start;
         double elapsed = duration.count();
-        p->running_times.push_back(elapsed);
+        p.running_times.push_back(elapsed);
         average = 1.0/i * ((i-1)*average + elapsed);
         maximum = std::max(maximum, elapsed);
         minimum = std::min(minimum, elapsed);
         std_deviation = std::sqrt(1.0/i*(std::pow(std_deviation, 2)*(i-1) + std::pow((elapsed - average),2)));
     }
 
-    p->average = average;
-    p->maximum = maximum;
-    p->minimum = minimum;
-    p->stdeviation = std_deviation;
+    p.average = average;
+    p.maximum = maximum;
+    p.minimum = minimum;
+    p.stdeviation = std_deviation;
  
-    return (*p);
+    return p;
 }
