@@ -5,24 +5,21 @@ using Mat::Matrix;
 
 int main(void) {
 
-    for (int i = 4; i < 2048; i = (i << 1)) {
-	std::ostringstream a_filename, b_filename;
-	a_filename << "Matrizes/A" << i << "x" << i << ".txt";
-	b_filename << "Matrizes/B" << i << "x" << i << ".txt";
+	int reps = 20;
 
-	Matrix a, b, c;
-	Mat::read_matrix(a_filename.str(), a);
-	Mat::read_matrix(b_filename.str(), b);
-        
-        std::map<std::string, double> stats_sequential;
-        Mat::perf_mult_with_stats(a, b, c, 20, Mat::sequential_mult, stats_sequential);
+	for (int i = Mat::min_n; i <=Mat::max_n; i = (i << 1)) {
+		Matrix A, B, C;
+		Mat::read_matrix(Mat::get_filename("A", i), A);
+		Mat::read_matrix(Mat::get_filename("B", i), B);
+		
+		std::map<std::string, double> stats_sequential;
+		Mat::perf_mult_with_stats(A, B, C, reps, Mat::sequential_mult, stats_sequential);
 
-        std::map<std::string, double> stats_concurrent;
-        Mat::perf_mult_with_stats(a, b, c, 20, Mat::concurrent_mult, stats_concurrent);
+		std::map<std::string, double> stats_concurrent;
+		Mat::perf_mult_with_stats(A, B, C, reps, Mat::concurrent_mult, stats_concurrent);
 
-        std::cout << "N = " << i << std::endl;
+		std::cout << "N = " << i << std::endl;
+	} 
 
-    } 
-
-    return 0;
+	return 0;
 }

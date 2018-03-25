@@ -27,6 +27,7 @@ namespace Mat {
 	void concurrent_mult(const Matrix& A, const Matrix& B, Matrix& C);
 
 	void read_arguments(int argc, char const *argv[], int& n, char& method, bool& write);
+	std::string get_filename(std::string matrix_name, int n);
 	void read_matrix(std::string filename, Matrix& matrix);
 	void print_matrix(const Matrix& matrix, std::ostream& output=std::cout);
 

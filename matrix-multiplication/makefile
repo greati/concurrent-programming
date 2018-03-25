@@ -18,7 +18,7 @@ BINDIR = ./bin/
 MULT_EXEC = multimat
 TESTS_EXEC = perftests
 
-### executable target
+### executable targets
 main: bin Mat.o multimat.o
 	$(CXX) $(BINDIR)Mat.o $(BINDIR)multimat.o \
 	-o $(MULT_EXEC) $(OPTIONSCXX)
@@ -39,7 +39,7 @@ multimat.o: $(SRCDIR)multimat.cpp
 perftests.o: $(SRCDIR)perftests.cpp
 
 
-### clear objects & executable
+### clear objects & executables
 clean: bin
 	$(DEL) ./$(MULT_EXEC)
 	$(DEL) ./$(TESTS_EXEC)

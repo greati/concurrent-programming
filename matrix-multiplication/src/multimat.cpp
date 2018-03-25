@@ -4,20 +4,14 @@
 
 using Mat::Matrix;
 
-std::string get_filename(std::string matrix_name, int n) {
-	std::ostringstream filename;
-	filename << "Matrizes/" << matrix_name << n << "x" << n << ".txt";
-	return filename.str();
-}
-
 int main(int argc, char const *argv[])
 {
 	int n; char method; bool write;
 	Mat::read_arguments(argc, argv, n, method, write);
 
 	Matrix A, B;
-	Mat::read_matrix(get_filename("A", n), A);
-	Mat::read_matrix(get_filename("B", n), B);
+	Mat::read_matrix(Mat::get_filename("A", n), A);
+	Mat::read_matrix(Mat::get_filename("B", n), B);
 
 	Matrix C;
  	auto start = std::chrono::steady_clock::now();
@@ -33,7 +27,7 @@ int main(int argc, char const *argv[])
 		" completed in " << time.count() << "ms" << std::endl;
 
 	if (write) {
-		std::ofstream result_file(get_filename("C", n));
+		std::ofstream result_file(Mat::get_filename("C", n));
 		Mat::print_matrix(C, result_file);
 	}
 
