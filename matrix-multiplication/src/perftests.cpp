@@ -34,10 +34,11 @@ int main(int argn, char * args[]) {
         std::cout << "-- Writing to file..." << i << std::endl;
         ofs << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
         ofs << std::to_string(i) << " C " << concStats.tostring() << std::endl;
-        ofs.close();
 
         std::cout << "-- Done." << std::endl;
     }
+
+    ofs.close();
 
     return 0;
 }
