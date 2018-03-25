@@ -6,7 +6,7 @@ using Mat::Matrix;
 
 int main(int argc, char const *argv[])
 {
-	int n; char method; bool write;
+	int n; Mat::ExecType method; bool write;
 	Mat::read_arguments(argc, argv, n, method, write);
 
 	Matrix A, B;
@@ -15,14 +15,14 @@ int main(int argc, char const *argv[])
 
 	Matrix C;
  	auto start = std::chrono::steady_clock::now();
- 	if (method == 'C')
+ 	if (method == Mat::CONCURRENT)
 		Mat::concurrent_mult(A, B, C);
 	else
 		Mat::sequential_mult(A, B, C);
 	auto end = std::chrono::steady_clock::now();
 
 	std::chrono::duration<double, std::milli> time(end-start);
-	std::cout << (method == 'C' ? "concurrent" : "sequential") <<
+	std::cout << (method == Mat::CONCURRENT ? "concurrent" : "sequential") <<
 		" multiplication of matrixes of size " << n << "x" << n <<
 		" completed in " << time.count() << "ms" << std::endl;
 
