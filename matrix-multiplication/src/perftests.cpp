@@ -1,18 +1,18 @@
 #include <iostream>
-#include <Mat.h>
 #include <fstream>
+#include "MatTestUtils.h"
 
 using Mat::Matrix;
-using Mat::PerfStats;
+using MatTestUtils::PerfStats;
 
 int main(int argn, char * args[]) {
 
     if (argn < 2)
         throw std::invalid_argument("missing results file argument");
 
-    const int reps = 20;
+    const int reps = 1;
     const int INIT_SIZE = 4;
-    const int END_SIZE = 2048;
+    const int END_SIZE = 16;
 
     std::ofstream results;
     results.open(args[1], std::ios::app);
@@ -23,13 +23,13 @@ int main(int argn, char * args[]) {
         std::cout << "-- Reading matrices..." << std::endl;
 
     	Matrix a, b, c;
-    	Mat::read_matrix(Mat::get_filename("A", i), a);
-    	Mat::read_matrix(Mat::get_filename("B", i), b);
+    	Mat::read_matrix(MatTestUtils::get_filename("A", i), a);
+    	Mat::read_matrix(MatTestUtils::get_filename("B", i), b);
         
         std::cout << "-- Multiplying sequential..." << std::endl;
-        PerfStats seqStats = Mat::mult_perf_stats(a, b, c, reps, Mat::sequential_mult);
+        PerfStats seqStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::sequential_mult);
         std::cout << "-- Multiplying concurrent..." << std::endl;
-        PerfStats concStats = Mat::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
+        PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
 
         std::cout << "-- Writing to file..." << i << std::endl;
         results << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
