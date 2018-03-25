@@ -77,3 +77,8 @@ PerfStats MatTestUtils::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix
  
     return p;
 }
+
+std::ostream& MatTestUtils::operator<<(std::ostream& os, const PerfStats& ps) {
+    return os << std::to_string(ps.average) << std::setw(15)  << std::to_string(ps.maximum) << std::setw(15) <<
+        std::to_string(ps.minimum) << std::setw(15) << std::to_string(ps.stdeviation);
+}

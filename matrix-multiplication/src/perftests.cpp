@@ -10,13 +10,15 @@ int main(int argn, char * args[]) {
     if (argn < 2)
         throw std::invalid_argument("missing results file argument");
 
-    const int reps = 1;
+    const int reps = 20;
     const int INIT_SIZE = 4;
-    const int END_SIZE = 16;
+    const int END_SIZE = 2048;
 
     std::ofstream results;
     results.open(args[1], std::ios::app);
-    results << "n" << " " << "method" << " " << "avg" << " " << "max" << " " << "min" << " " << "std" << std::endl;
+    results << std::setw(15) << "n" << std::setw(15) << "method" << std::setw(15) 
+        << "avg" << std::setw(15) << "max" 
+        << std::setw(15) << "min" << std::setw(15) << "std" << std::endl;
 
     for (int i = INIT_SIZE; i <= END_SIZE; i = (i << 1)) {
         std::cout << "Starting for N = " << i << std::endl;
@@ -31,9 +33,11 @@ int main(int argn, char * args[]) {
         std::cout << "-- Multiplying concurrent..." << std::endl;
         PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
 
-        std::cout << "-- Writing to file..." << i << std::endl;
-        results << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
-        results << std::to_string(i) << " C " << concStats.tostring() << std::endl;
+        std::cout << "-- Writing to file..." << std::endl;
+        results << std::setw(15) << std::to_string(i) << std::setw(15) << "S" 
+            << std::setw(15) << seqStats << std::endl;
+        results << std::setw(15) << std::to_string(i) << std::setw(15) << "C" 
+            << std::setw(15) << concStats << std::endl;
 
         std::cout << "-- Done." << std::endl;
     }

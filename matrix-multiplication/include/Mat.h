@@ -4,11 +4,7 @@
 #include <iostream>
 #include <thread>
 #include <vector>
-#include <stdexcept>
-#include <sstream>
 #include <fstream>
-#include <functional>
-#include <cmath>
 
 namespace Mat {
 	typedef std::vector<std::vector<int>> Matrix;
