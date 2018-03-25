@@ -1,6 +1,7 @@
 #include "Mat.h"
 
 using Mat::Matrix;
+using Mat::PerfStats;
 
 const int Mat::min_n = 4;
 const int Mat::max_n = 2048;
@@ -20,9 +21,9 @@ void Mat::compute_mult_line(const Matrix& A, const Matrix& B, Matrix& C, const i
 void Mat::sequential_mult(const Matrix& A, const Matrix& B, Matrix& C) {
 	C.resize(A.size());
 	for (auto& c : C)
-		c.resize(B[0].size());
+            c.resize(B[0].size());
 	for (unsigned int i = 0; i < C.size(); ++i)
-		Mat::compute_mult_line(A, B, C, i);
+            Mat::compute_mult_line(A, B, C, i);
 }
 
 /* Concurrent multiplication */
@@ -85,29 +86,30 @@ void Mat::print_matrix(const Matrix& matrix)
 	}
 }
 
-void Mat::perf_mult_with_stats(const Matrix& A, const Matrix& B, Matrix& C, 
-        const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier, 
-        std::map<std::string, double>& stats) {
+const PerfStats& Mat::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& C, 
+        const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier) {
 
     double average = 0.0, maximum = 0.0, minimum = 0.0, stdeviation = 0.0;
     
+    PerfStats * p = new PerfStats;//{average, maximum, minimum, stdeviation};
+
     for (int i = 1; i <= nrepeat; ++i) {
         auto start = std::chrono::steady_clock::now();
         multiplier(A, B, C); 
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> duration = end - start;
         double elapsed = duration.count();
+        p->running_times.push_back(elapsed);
         average = 1/i * ((i-1)*average + elapsed);
         maximum = std::max(maximum, elapsed);
         minimum = std::max(minimum, elapsed);
         stdeviation = std::sqrt(1/i*(std::pow(stdeviation, 2)*(i-1) + std::pow((elapsed - average),2)));
     }
-    
-    // Compute standard deviation
 
-    stats["average"] = average;
-    stats["maximum"] = maximum;
-    stats["minimum"] = minimum;
-    stats["stdeviation"] = stdeviation;
-
+    p->average = average;
+    p->maximum = maximum;
+    p->minimum = minimum;
+    p->stdeviation = stdeviation;
+ 
+    return (*p);
 }

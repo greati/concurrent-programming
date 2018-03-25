@@ -18,6 +18,20 @@ namespace Mat {
             CONCURRENT = 1  
         };
 
+        struct PerfStats {
+            double average = 0.0, maximum = 0.0, minimum = 0.0, stdeviation = 0.0;
+            std::vector<double> running_times;
+            PerfStats(){};
+            PerfStats(const double & _average, const double & _maximum, 
+                    const double & _minimum, const double & _stdeviation)
+                    : average {_average}, maximum {_maximum}, minimum {_minimum}, stdeviation {_stdeviation}
+            {};
+            std::string tostring() {
+                return std::to_string(average) + " " + std::to_string(maximum) + " " + 
+                    std::to_string(minimum) + " " + std::to_string(stdeviation);
+            }
+        };
+
 	extern const int min_n;
 	extern const int max_n;
 	typedef std::vector<std::vector<int>> Matrix;
@@ -40,8 +54,8 @@ namespace Mat {
          * @param   C       Resulting nxn matrix.
          * @param   nrepeat Number of repetitions.
          * */
-        void perf_mult_with_stats(const Matrix&, const Matrix&, Matrix&, const int &, 
-                std::function<void(const Matrix&, const Matrix&, Matrix&)>, std::map<std::string, double>&);
+        const PerfStats& mult_perf_stats(const Matrix&, const Matrix&, Matrix&, const int &, 
+                std::function<void(const Matrix&, const Matrix&, Matrix&)>);
 
 
 }
