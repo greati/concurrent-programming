@@ -29,13 +29,14 @@ int main(int argn, char * args[]) {
         std::cout << "-- Multiplying concurrent..." << std::endl;
         PerfStats concStats = Mat::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
 
-        std::cout << "-- Writing to file..." << std::endl;
-        results << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
-        results << std::to_string(i) << " C " << concStats.tostring() << std::endl;
-        results.close();
+        std::cout << "-- Writing to file..." << i << std::endl;
+        ofs << std::to_string(i) << " S " << seqStats.tostring() << std::endl;
+        ofs << std::to_string(i) << " C " << concStats.tostring() << std::endl;
 
         std::cout << "-- Done." << std::endl;
     }
+
+    ofs.close();
 
     return 0;
 }
