@@ -38,9 +38,6 @@ void Mat::read_matrix(std::string filename, Matrix& matrix)
 {
 	std::ifstream file (filename);
 	if (!file.good())
-		file = std::ifstream("../"+filename);
-
-	if (!file.good())
 		throw std::ifstream::failure("failed to read matrix file " + filename);
 	
 	int n, m;
