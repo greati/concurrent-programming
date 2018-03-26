@@ -2,14 +2,13 @@
 #define __MAT_TEST_UTILS_H__
 
 #include "Mat.h"
-#include <iostream>
+ // std::setw
 #include <iomanip>
-#include <vector>
-#include <stdexcept>
+// std::experimental::filesystem::exists, path
 #include <experimental/filesystem>
-#include <sstream>
-#include <fstream>
+// std::function
 #include <functional>
+// std::sqrt
 #include <cmath>
 
 namespace MatTestUtils {
