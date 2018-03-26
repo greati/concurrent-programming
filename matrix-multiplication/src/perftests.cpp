@@ -11,7 +11,7 @@ int main(int argn, char * args[]) {
         throw std::invalid_argument("missing results file argument");
 
     const int reps = 1;
-    const int init = MatTestUtils::min_n;
+    const int init_size = MatTestUtils::min_n;
     const int end_size = 16;
     const int col_width = 15;
 
