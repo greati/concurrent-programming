@@ -10,17 +10,21 @@ int main(int argn, char * args[]) {
     if (argn < 2)
         throw std::invalid_argument("missing results file argument");
 
-    const int reps = 20;
-    const int INIT_SIZE = 4;
-    const int END_SIZE = 2048;
+    const int reps = 1;
+    const int init = MatTestUtils::min_n;
+    const int end_size = 16;
+    const int col_width = 15;
 
     std::ofstream results;
     results.open(args[1], std::ios::app);
-    results << std::setw(15) << "n" << std::setw(15) << "method" << std::setw(15) 
-        << "avg" << std::setw(15) << "max" 
-        << std::setw(15) << "min" << std::setw(15) << "std" << std::endl;
+    results << std::setw(col_width) << "n" << std::setw(col_width) 
+        << "method" << std::setw(col_width) 
+        << "avg" << std::setw(col_width) 
+        << "max" << std::setw(col_width) 
+        << "min" << std::setw(col_width) 
+        << "std" << std::endl;
 
-    for (int i = INIT_SIZE; i <= END_SIZE; i = (i << 1)) {
+    for (int i = init_size; i <= end_size; i = (i << 1)) {
         std::cout << "Starting for N = " << i << std::endl;
         std::cout << "-- Reading matrices..." << std::endl;
 
@@ -34,15 +38,15 @@ int main(int argn, char * args[]) {
         PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
 
         std::cout << "-- Writing to file..." << std::endl;
-        results << std::setw(15) << std::to_string(i) << std::setw(15) << "S" 
-            << std::setw(15) << seqStats << std::endl;
-        results << std::setw(15) << std::to_string(i) << std::setw(15) << "C" 
-            << std::setw(15) << concStats << std::endl;
+        results << std::setw(col_width) << std::to_string(i) << std::setw(col_width) 
+            << "S" << std::setw(col_width) << seqStats << std::endl;
+        results << std::setw(col_width) << std::to_string(i) << std::setw(col_width) 
+            << "C" << std::setw(col_width) << concStats << std::endl;
 
         std::cout << "-- Done." << std::endl;
     }
 
     results.close();
 
-    return 0;
+    return EXIT_SUCCESS;
 }
