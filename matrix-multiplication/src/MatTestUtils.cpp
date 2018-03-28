@@ -53,7 +53,7 @@ std::string MatTestUtils::get_filename(std::string matrix_name, int n) {
 PerfStats MatTestUtils::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& C, 
         const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier) {
 
-    double average = 0.0, maximum = 0.0, minimum = 100000, std_deviation = 0.0;
+    double average = 0.0, maximum = 0.0, minimum = 100000, sum_variance = 0.0;
     
     PerfStats p;
 
@@ -67,13 +67,15 @@ PerfStats MatTestUtils::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix
         average = 1.0/i * ((i-1)*average + elapsed);
         maximum = std::max(maximum, elapsed);
         minimum = std::min(minimum, elapsed);
-        std_deviation = std::sqrt(1.0/i*(std::pow(std_deviation, 2)*(i-1) + std::pow((elapsed - average),2)));
     }
+
+    for (auto& i : p.running_times)
+        sum_variance += std::pow(i-average,2);
 
     p.average = average;
     p.maximum = maximum;
     p.minimum = minimum;
-    p.stdeviation = std_deviation;
+    p.stdeviation = std::sqrt(1.0/nrepeat * sum_variance);
  
     return p;
 }

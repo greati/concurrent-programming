@@ -10,9 +10,9 @@ int main(int argn, char * args[]) {
     if (argn < 2)
         throw std::invalid_argument("missing results file argument");
 
-    const int reps = 1;
+    const int reps = 20;
     const int init_size = MatTestUtils::min_n;
-    const int end_size = 16;
+    const int end_size = MatTestUtils::max_n;
     const int col_width = 15;
 
     std::ofstream results;
@@ -36,7 +36,6 @@ int main(int argn, char * args[]) {
         PerfStats seqStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::sequential_mult);
         std::cout << "-- Multiplying concurrent..." << std::endl;
         PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
-
         std::cout << "-- Writing to file..." << std::endl;
         results << std::setw(col_width) << std::to_string(i) << std::setw(col_width) 
             << "S" << std::setw(col_width) << seqStats << std::endl;
