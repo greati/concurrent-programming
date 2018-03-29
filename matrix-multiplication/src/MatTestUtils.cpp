@@ -1,7 +1,6 @@
 #include "MatTestUtils.h"
 #include "Matrix.h"
 
-using Mat::Matrix;
 using MatTestUtils::PerfStats;
 namespace fs = std::experimental::filesystem;
 

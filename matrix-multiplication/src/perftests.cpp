@@ -3,7 +3,6 @@
 #include "MatTestUtils.h"
 #include "ConcurrentMatrixMultiplier.h"
 
-using Mat::Matrix;
 using MatTestUtils::PerfStats;
 
 int main(int argn, char * args[]) {

@@ -4,8 +4,6 @@
 #include "Matrix.h"
 #include "ConcurrentMatrixMultiplier.h"
 
-using Mat::Matrix;
-
 int main(int argc, char const *argv[])
 {
 	int n; MatTestUtils::ExecType method; bool write;
@@ -29,8 +27,8 @@ int main(int argc, char const *argv[])
 
 	if (write) {
 		std::ofstream result_file(MatTestUtils::get_filename("C", n));
+                result_file << C.rows << " " << C.cols << std::endl;
                 result_file << C;
-		//Mat::print_matrix(c, result_file);
 		result_file.close();
 	}
 

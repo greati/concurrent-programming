@@ -1,7 +1,6 @@
 #ifndef __MAT_TEST_UTILS_H__
 #define __MAT_TEST_UTILS_H__
 
-#include "Mat.h"
 #include "Matrix.h"
  // std::setw
 #include <iomanip>
@@ -11,6 +10,7 @@
 #include <functional>
 // std::sqrt
 #include <cmath>
+#include <fstream>
 
 namespace MatTestUtils {
 
