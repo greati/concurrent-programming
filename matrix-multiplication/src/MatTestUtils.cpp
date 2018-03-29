@@ -1,4 +1,5 @@
 #include "MatTestUtils.h"
+#include "Matrix.h"
 
 using Mat::Matrix;
 using MatTestUtils::PerfStats;
@@ -50,8 +51,8 @@ std::string MatTestUtils::get_filename(std::string matrix_name, int n) {
 	return filename.str();
 }
 
-PerfStats MatTestUtils::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix& C, 
-        const int & nrepeat, std::function<void(const Matrix&, const Matrix&, Matrix&)> multiplier) {
+PerfStats MatTestUtils::mult_perf_stats(const Math::Matrix<int>& A, const Math::Matrix<int>& B, 
+        Math::Matrix<int>& C, const int & nrepeat) {
 
     double average = 0.0, maximum = 0.0, minimum = 100000, sum_variance = 0.0;
     
@@ -59,7 +60,7 @@ PerfStats MatTestUtils::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix
 
     for (int i = 1; i <= nrepeat; ++i) {
         auto start = std::chrono::steady_clock::now();
-        multiplier(A, B, C); 
+        C = A * B;
         auto end = std::chrono::steady_clock::now();
         std::chrono::duration<double> duration = end - start;
         double elapsed = duration.count();
@@ -83,4 +84,26 @@ PerfStats MatTestUtils::mult_perf_stats(const Matrix& A, const Matrix& B, Matrix
 std::ostream& MatTestUtils::operator<<(std::ostream& os, const PerfStats& ps) {
     return os << std::to_string(ps.average) << std::setw(15)  << std::to_string(ps.maximum) << std::setw(15) <<
         std::to_string(ps.minimum) << std::setw(15) << std::to_string(ps.stdeviation);
+}
+
+Math::Matrix<int> MatTestUtils::read_matrix(std::string filename)
+{
+	std::ifstream file (filename);
+	if (!file.good())
+		throw std::ifstream::failure("failed to read matrix file " + filename);
+	
+	int n, m;
+	file >> n >> m;
+
+        Math::Matrix<int> matrix {n, m, 0};
+
+	for (auto i = 0; i < n; ++i) {
+		for (auto j = 0; j < m; ++j) {
+			int val;
+			file >> val;
+			matrix[i][j] = val;
+		}
+	}
+
+        return matrix;
 }

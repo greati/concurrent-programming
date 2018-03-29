@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include "MatTestUtils.h"
+#include "ConcurrentMatrixMultiplier.h"
 
 using Mat::Matrix;
 using MatTestUtils::PerfStats;
@@ -28,14 +29,15 @@ int main(int argn, char * args[]) {
         std::cout << "Starting for N = " << i << std::endl;
         std::cout << "-- Reading matrices..." << std::endl;
 
-    	Matrix a, b, c;
-    	Mat::read_matrix(MatTestUtils::get_filename("A", i), a);
-    	Mat::read_matrix(MatTestUtils::get_filename("B", i), b);
+        Math::Matrix<int> a = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",i));
+        Math::Matrix<int> b = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",i));
+        Math::Matrix<int> c {a.rows, b.cols, 0};
         
         std::cout << "-- Multiplying sequential..." << std::endl;
-        PerfStats seqStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::sequential_mult);
+        PerfStats seqStats = MatTestUtils::mult_perf_stats(a, b, c, reps);
         std::cout << "-- Multiplying concurrent..." << std::endl;
-        PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps, Mat::concurrent_mult);
+        a.set_multiplier(new Math::ConcurrentMatrixMultiplier<int>{});
+        PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps);
         std::cout << "-- Writing to file..." << std::endl;
         results << std::setw(col_width) << std::to_string(i) << std::setw(col_width) 
             << "S" << std::setw(col_width) << seqStats << std::endl;

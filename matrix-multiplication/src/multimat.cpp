@@ -1,6 +1,8 @@
 #include <iostream>
 #include <chrono>
 #include "MatTestUtils.h"
+#include "Matrix.h"
+#include "ConcurrentMatrixMultiplier.h"
 
 using Mat::Matrix;
 
@@ -9,16 +11,15 @@ int main(int argc, char const *argv[])
 	int n; MatTestUtils::ExecType method; bool write;
 	MatTestUtils::read_arguments(argc, argv, n, method, write);
 
-	Matrix a, b;
-	Mat::read_matrix(MatTestUtils::get_filename("A", n), a);
-	Mat::read_matrix(MatTestUtils::get_filename("B", n), b);
+        Math::Matrix<int> A = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",n));
+        Math::Matrix<int> B = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",n));
+        Math::Matrix<int> C {A.rows, B.cols, 0};
 
-	Matrix c;
- 	auto start = std::chrono::steady_clock::now();
  	if (method == MatTestUtils::CONCURRENT)
-		Mat::concurrent_mult(a, b, c);
-	else
-		Mat::sequential_mult(a, b, c);
+            A.set_multiplier(new Math::ConcurrentMatrixMultiplier<int>{});
+
+ 	auto start = std::chrono::steady_clock::now();
+        C = A*B;
 	auto end = std::chrono::steady_clock::now();
 
 	std::chrono::duration<double, std::milli> time(end-start);
@@ -28,7 +29,8 @@ int main(int argc, char const *argv[])
 
 	if (write) {
 		std::ofstream result_file(MatTestUtils::get_filename("C", n));
-		Mat::print_matrix(c, result_file);
+                result_file << C;
+		//Mat::print_matrix(c, result_file);
 		result_file.close();
 	}
 

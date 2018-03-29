@@ -23,11 +23,11 @@ BINDIR = ./bin/
 BUILDDIR = ./build/
 
 ### executable targets
-main: bin build Mat.o MatTestUtils.o multimat.o
+main: bin build Mat.o MatTestUtils.o multimat.o 
 	$(CXX) $(BUILDDIR)Mat.o $(BUILDDIR)MatTestUtils.o $(BUILDDIR)multimat.o \
 	-o $(BINDIR)multimat $(OPTIONSCXX)
 
-tests: bin build Mat.o MatTestUtils.o perftests.o
+tests: bin build Mat.o MatTestUtils.o perftests.o 
 	$(CXX) $(BUILDDIR)Mat.o $(BUILDDIR)MatTestUtils.o $(BUILDDIR)perftests.o \
 	-o $(BINDIR)perftests $(OPTIONSCXX)
 
@@ -36,13 +36,16 @@ bin:
 build:
 	mkdir -p ./build/
 
-%.o: $(SRCDIR)%.cpp
+#Matrix.o: ./include/Matrix.h ./src/Matrix.inl
+#	$(CXX) -c $< -o $(BUILDDIR)$@ $(OPTIONSCXX) $(DECLRDIR)
+
+%.o: $(SRCDIR)%.cpp 
 	$(CXX) -c $< -o $(BUILDDIR)$@ $(OPTIONSCXX) $(DECLRDIR)
 
-Mat.o: $(SRCDIR)Mat.cpp
-MatTestUtils.o: $(SRCDIR)MatTestUtils.cpp
-multimat.o: $(SRCDIR)multimat.cpp
-perftests.o: $(SRCDIR)perftests.cpp
+Mat.o: $(SRCDIR)Mat.cpp ./include/Matrix.h
+MatTestUtils.o: $(SRCDIR)MatTestUtils.cpp ./include/Matrix.h
+multimat.o: $(SRCDIR)multimat.cpp ./include/Matrix.h
+perftests.o: $(SRCDIR)perftests.cpp ./include/Matrix.h
 
 
 ### clear objects & executables

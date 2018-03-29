@@ -2,6 +2,7 @@
 #define __MAT_TEST_UTILS_H__
 
 #include "Mat.h"
+#include "Matrix.h"
  // std::setw
 #include <iomanip>
 // std::experimental::filesystem::exists, path
@@ -36,6 +37,7 @@ namespace MatTestUtils {
     std::ostream& operator<<(std::ostream& os, const PerfStats& ps);
     void read_arguments(int argc, char const *argv[], int& n, ExecType& method, bool& write);
     std::string get_filename(std::string matrix_name, int n);
+    Math::Matrix<int> read_matrix(std::string filename);
 
     /* Multiplies AxB repeated times, returning
      * statistical results about the sequence of
@@ -47,8 +49,8 @@ namespace MatTestUtils {
      * @param   nrepeat         Number of repetitions.
      * @param   multiplier      Function that multiplies matrices.
      * */
-    PerfStats mult_perf_stats(const Mat::Matrix&, const Mat::Matrix&, Mat::Matrix&, const int &, 
-            std::function<void(const Mat::Matrix&, const Mat::Matrix&, Mat::Matrix&)>);
+    PerfStats mult_perf_stats(const Math::Matrix<int>& A, const Math::Matrix<int>& B, 
+        Math::Matrix<int>& C, const int & nrepeat);
 }
 
 #endif
