@@ -8,22 +8,25 @@
 #include "SequentialMatrixMultiplier.h"
 
 /**
- * Represents an m x n matrix, with its data and some operations.
- *
- * It is, actually, a template class, which receives, as template
- * argument, the field of the vector space to which the represented
- * matrix belongs. This is a simplified matrix class, which
- * presents only the multiplication operation (through an Strategy)
- * and some auxiliar methods, such as matrix assignment and
- * element access and modification. 
- *
- * @author      Vitor Greati, Carlos Vieira
- * @date        2018-04-29
- * @version     1.0
+ * Classes and definitions related to mathematical objects
+ * and operations.
  * */
-
 namespace Math {
 
+    /**
+     * Represents an m x n matrix, with its data and some operations.
+     *
+     * It is, actually, a template class, which receives, as template
+     * argument, the field of the vector space to which the represented
+     * matrix belongs. This is a simplified matrix class, which
+     * presents only the multiplication operation (through an Strategy)
+     * and some auxiliar methods, such as matrix assignment and
+     * element access and modification. 
+     *
+     * @author      Vitor Greati, Carlos Vieira
+     * @date        2018-04-29
+     * @version     1.0
+     * */
     template<typename TField>
     class Matrix {
 

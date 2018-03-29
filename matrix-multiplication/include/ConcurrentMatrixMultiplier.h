@@ -41,7 +41,7 @@ namespace Math {
             }
 
             /**
-             * Basic operation of computing one row of the product matrix.
+             * Basic operation for computing one row of the product matrix.
              *
              * @param A         Left operand.
              * @param B         Right operand.

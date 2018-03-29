@@ -1,0 +1,286 @@
+\hypertarget{classMath_1_1Matrix}{}\section{Math\+:\+:Matrix$<$ T\+Field $>$ Class Template Reference}
+\label{classMath_1_1Matrix}\index{Math\+::\+Matrix$<$ T\+Field $>$@{Math\+::\+Matrix$<$ T\+Field $>$}}
+
+
+Represents an m x n matrix, with its data and some operations.  
+
+
+
+
+{\ttfamily \#include $<$Matrix.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMath_1_1Matrix_a15145cfc26ef1fd2f68e4a4489490e30}{Matrix}} (const int \&\+\_\+m, const int \&\+\_\+n, const T\+Field \&\+\_\+diag, const T\+Field \&\+\_\+others)
+\begin{DoxyCompactList}\small\item\em Constructor for an m x n matrix, accepting values for diagonal elements and others. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMath_1_1Matrix_ae0d9fbd3225b9b3d50f7b42de14cead6}{Matrix}} (const int \&\+\_\+m, const int \&\+\_\+n, const T\+Field \&\+\_\+initial)
+\begin{DoxyCompactList}\small\item\em Constructor for an m x n matrix, with an initial elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMath_1_1Matrix_a3e7c39f3d5951f365f687341cfb0feef}{Matrix}} (const std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ T\+Field $>$$>$ \&l)
+\begin{DoxyCompactList}\small\item\em Constructor which takes an initializer list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMath_1_1Matrix_a2b849f680fc4ba0d5b0277f1b3116b81}{Matrix}} (const int \&n, const T\+Field $\ast$array)
+\begin{DoxyCompactList}\small\item\em Constructor for a one dimensional matrix from a native array. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMath_1_1Matrix_adc2c049cc6c6341c4088c6ec6e6fd084}\label{classMath_1_1Matrix_adc2c049cc6c6341c4088c6ec6e6fd084}} 
+\mbox{\hyperlink{classMath_1_1Matrix_adc2c049cc6c6341c4088c6ec6e6fd084}{Matrix}} (const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&from)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMath_1_1Matrix_aacd788cf0658928929d9c381f95cd060}\label{classMath_1_1Matrix_aacd788cf0658928929d9c381f95cd060}} 
+\mbox{\hyperlink{classMath_1_1Matrix_aacd788cf0658928929d9c381f95cd060}{$\sim$\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for deleting the matrix data. \end{DoxyCompactList}\item 
+const T\+Field \& \mbox{\hyperlink{classMath_1_1Matrix_a41b0dc600e73ce6efaea25e0d8501496}{at}} (const int \&i, const int \&j) const
+\begin{DoxyCompactList}\small\item\em Access function\+: takes the element data\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMath_1_1Matrix_aa45b37d9f91280cee76233e37975046b}{set}} (const int \&i, const int \&j, const T\+Field \&value)
+\begin{DoxyCompactList}\small\item\em Set function\+: set data\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} to a value. \end{DoxyCompactList}\item 
+T\+Field $\ast$\& \mbox{\hyperlink{classMath_1_1Matrix_ac2ab22aff5aaa615f58fb42a64e1e698}{operator\mbox{[}$\,$\mbox{]}}} (const int \&i)
+\begin{DoxyCompactList}\small\item\em Operator \mbox{[}\mbox{]} for accessing rows of a matrix. \end{DoxyCompactList}\item 
+T\+Field $\ast$ \mbox{\hyperlink{classMath_1_1Matrix_af7be31f5a4a0448fe4b4f6c9d3893879}{operator\mbox{[}$\,$\mbox{]}}} (const int \&i) const
+\begin{DoxyCompactList}\small\item\em Operator \mbox{[}\mbox{]} for accessing rows of a matrix; this returns a copy. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \mbox{\hyperlink{classMath_1_1Matrix_a0a501679a182d8556083fcba2245a50f}{operator$\ast$}} (const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&\+\_\+rhs) const
+\begin{DoxyCompactList}\small\item\em Operator for multiplication of matrices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMath_1_1Matrix_a09f512babb6fb371f3b3978e89e4a05b}{set\+\_\+multiplier}} (\mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Matrix\+Multiplier}}$<$ T\+Field $>$ $\ast$multiplier)
+\begin{DoxyCompactList}\small\item\em Set the strategy for multiplication. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \& \mbox{\hyperlink{classMath_1_1Matrix_a74a286ee8e6acb9bb1bc6c2b77c0708b}{operator=}} (\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ m)
+\begin{DoxyCompactList}\small\item\em Operator for assignment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMath_1_1Matrix_a5c1383f7befaac0c43660f75614c8bd5}\label{classMath_1_1Matrix_a5c1383f7befaac0c43660f75614c8bd5}} 
+int {\bfseries rows}
+\item 
+\mbox{\Hypertarget{classMath_1_1Matrix_ad9f2871b3b80b076d000f5f95c8ca8c5}\label{classMath_1_1Matrix_ad9f2871b3b80b076d000f5f95c8ca8c5}} 
+int {\bfseries cols}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\+Field$>$\newline
+class Math\+::\+Matrix$<$ T\+Field $>$}
+
+Represents an m x n matrix, with its data and some operations. 
+
+It is, actually, a template class, which receives, as template argument, the field of the vector space to which the represented matrix belongs. This is a simplified matrix class, which presents only the multiplication operation (through an Strategy) and some auxiliar methods, such as matrix assignment and element access and modification.
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Carlos Vieira 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/04-\/29 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMath_1_1Matrix_a15145cfc26ef1fd2f68e4a4489490e30}\label{classMath_1_1Matrix_a15145cfc26ef1fd2f68e4a4489490e30}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const int \&}]{\+\_\+m,  }\item[{const int \&}]{\+\_\+n,  }\item[{const T\+Field \&}]{\+\_\+diag,  }\item[{const T\+Field \&}]{\+\_\+others }\end{DoxyParamCaption})}
+
+
+
+Constructor for an m x n matrix, accepting values for diagonal elements and others. 
+
+It accepts two values\+: \+\_\+diag, which is the value for filling the diagonal; and \+\_\+others, which fills the other matrix positions.
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+m} & Number of lines. \\
+\hline
+{\em \+\_\+n} & Number of columns. \\
+\hline
+{\em \+\_\+diag} & Initial value for cells in the diagonal. \\
+\hline
+{\em \+\_\+others} & Initial value for the other cells. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_ae0d9fbd3225b9b3d50f7b42de14cead6}\label{classMath_1_1Matrix_ae0d9fbd3225b9b3d50f7b42de14cead6}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const int \&}]{\+\_\+m,  }\item[{const int \&}]{\+\_\+n,  }\item[{const T\+Field \&}]{\+\_\+initial }\end{DoxyParamCaption})}
+
+
+
+Constructor for an m x n matrix, with an initial elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+m} & Number of lines and columns. \\
+\hline
+{\em \+\_\+initial} & Fill the matrix with this element. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_a3e7c39f3d5951f365f687341cfb0feef}\label{classMath_1_1Matrix_a3e7c39f3d5951f365f687341cfb0feef}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const std\+::initializer\+\_\+list$<$ std\+::initializer\+\_\+list$<$ T\+Field $>$$>$ \&}]{l }\end{DoxyParamCaption})}
+
+
+
+Constructor which takes an initializer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & Initializer list with matrix elements. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_a2b849f680fc4ba0d5b0277f1b3116b81}\label{classMath_1_1Matrix_a2b849f680fc4ba0d5b0277f1b3116b81}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const int \&}]{n,  }\item[{const T\+Field $\ast$}]{array }\end{DoxyParamCaption})}
+
+
+
+Constructor for a one dimensional matrix from a native array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & Array with elements of the vector. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMath_1_1Matrix_a41b0dc600e73ce6efaea25e0d8501496}\label{classMath_1_1Matrix_a41b0dc600e73ce6efaea25e0d8501496}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!at@{at}}
+\index{at@{at}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{at()}{at()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+const T\+Field \& \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::at (\begin{DoxyParamCaption}\item[{const int \&}]{i,  }\item[{const int \&}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Access function\+: takes the element data\mbox{[}i\mbox{]}\mbox{[}j\mbox{]}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Element row. \\
+\hline
+{\em j} & Element column. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_a0a501679a182d8556083fcba2245a50f}\label{classMath_1_1Matrix_a0a501679a182d8556083fcba2245a50f}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$ \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&}]{\+\_\+rhs }\end{DoxyParamCaption}) const}
+
+
+
+Operator for multiplication of matrices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+rhs} & The matrix to right-\/multiply this matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_a74a286ee8e6acb9bb1bc6c2b77c0708b}\label{classMath_1_1Matrix_a74a286ee8e6acb9bb1bc6c2b77c0708b}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!operator=@{operator=}}
+\index{operator=@{operator=}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$ \& \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$}]{m }\end{DoxyParamCaption})}
+
+
+
+Operator for assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The current object will be equal to m. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_ac2ab22aff5aaa615f58fb42a64e1e698}\label{classMath_1_1Matrix_ac2ab22aff5aaa615f58fb42a64e1e698}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+T\+Field $\ast$\& \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const int \&}]{i }\end{DoxyParamCaption})}
+
+
+
+Operator \mbox{[}\mbox{]} for accessing rows of a matrix. 
+
+This returns a reference.
+
+Since arrays have \mbox{[}\mbox{]} access defined, this overload allows using \mbox{[}\mbox{]}\mbox{[}\mbox{]} for accessing and modifying matrix elements.
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & Row index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the first element of the row. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMath_1_1Matrix_af7be31f5a4a0448fe4b4f6c9d3893879}\label{classMath_1_1Matrix_af7be31f5a4a0448fe4b4f6c9d3893879}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+T\+Field $\ast$ \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const int \&}]{i }\end{DoxyParamCaption}) const}
+
+
+
+Operator \mbox{[}\mbox{]} for accessing rows of a matrix; this returns a copy. 
+
+Since arrays have \mbox{[}\mbox{]} access defined, this overload allows using \mbox{[}\mbox{]}\mbox{[}\mbox{]} for accessing matrix elements.
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & Row index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the first element of the row. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMath_1_1Matrix_aa45b37d9f91280cee76233e37975046b}\label{classMath_1_1Matrix_aa45b37d9f91280cee76233e37975046b}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!set@{set}}
+\index{set@{set}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::set (\begin{DoxyParamCaption}\item[{const int \&}]{i,  }\item[{const int \&}]{j,  }\item[{const T\+Field \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Set function\+: set data\mbox{[}i\mbox{]}\mbox{[}j\mbox{]} to a value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Element row. \\
+\hline
+{\em j} & Element column. \\
+\hline
+{\em value} & New value. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMath_1_1Matrix_a09f512babb6fb371f3b3978e89e4a05b}\label{classMath_1_1Matrix_a09f512babb6fb371f3b3978e89e4a05b}} 
+\index{Math\+::\+Matrix@{Math\+::\+Matrix}!set\+\_\+multiplier@{set\+\_\+multiplier}}
+\index{set\+\_\+multiplier@{set\+\_\+multiplier}!Math\+::\+Matrix@{Math\+::\+Matrix}}
+\subsubsection{\texorpdfstring{set\+\_\+multiplier()}{set\_multiplier()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$\+::set\+\_\+multiplier (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Matrix\+Multiplier}}$<$ T\+Field $>$ $\ast$}]{multiplier }\end{DoxyParamCaption})}
+
+
+
+Set the strategy for multiplication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em multiplier} & The new multiplier. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Matrix.\+h\item 
+src/Matrix.\+inl\end{DoxyCompactItemize}
