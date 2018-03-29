@@ -116,13 +116,7 @@ TField * Math::Matrix<TField>::operator[](const int & i) const {
 
 template<typename TField>
 Math::Matrix<TField> Math::Matrix<TField>::operator*(const Matrix<TField> & _rhs) const {
-    // Check multiplication condition
-    if (cols != _rhs.rows) 
-        throw std::logic_error("You must provide matrices mxn and nxp.");
-    // Multiply
-    Matrix<TField> prod {rows, _rhs.cols, 0};
-    this->multiplier->multiply(*this, _rhs, prod);
-    return prod;
+    return (*(this->multiplier))(*this, _rhs);
 }
 
 template<typename TField>
