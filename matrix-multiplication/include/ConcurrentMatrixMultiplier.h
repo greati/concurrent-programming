@@ -33,9 +33,9 @@ namespace Math {
              * */
             void multiply(const Matrix<TField>& A, const Matrix<TField>& B, Matrix<TField>& C) {
                 std::vector<std::thread> thread_list;
-                for (int i = 0; i < C.rows; ++i)
+                for (auto i = 0u; i < C.rows; ++i)
                     thread_list.push_back(std::thread(&ConcurrentMatrixMultiplier<TField>::compute_mult_line, 
-                                this, std::ref(A), std::ref(B), std::ref(C), i));
+                        this, std::ref(A), std::ref(B), std::ref(C), i));
                 for (auto& t : thread_list)
                     t.join();
             }
@@ -50,12 +50,13 @@ namespace Math {
              * */
             void compute_mult_line(const Matrix<TField>& A, const Matrix<TField>& B, 
                     Matrix<TField>& C, const int& i) {
-                for (int k = 0; k < B.cols; ++k) {
-                        int sum = 0;
-                        for (int m = 0; m < A.cols; ++m) {
-                                sum += A[i][m]*B[m][k];
+
+                for (auto k = 0u; k < B.cols; ++k) {
+                        TField sum = 0;
+                        for (auto m = 0u; m < A.cols; ++m) {
+                            sum += A(i, m)*B(m, k);
                         }
-                        C[i][k] = sum;
+                        C(i, k) = sum;
                 }
             }
 

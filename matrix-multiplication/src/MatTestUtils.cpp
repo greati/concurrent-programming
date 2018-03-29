@@ -91,16 +91,16 @@ Math::Matrix<int> MatTestUtils::read_matrix(std::string filename)
 	if (!file.good())
 		throw std::ifstream::failure("failed to read matrix file " + filename);
 	
-	int n, m;
+	unsigned n, m;
 	file >> n >> m;
 
-        Math::Matrix<int> matrix {n, m, 0};
+    Math::Matrix<int> matrix {n, m, 0};
 
-	for (auto i = 0; i < n; ++i) {
-		for (auto j = 0; j < m; ++j) {
+	for (auto i = 0u; i < n; ++i) {
+		for (auto j = 0u; j < m; ++j) {
 			int val;
 			file >> val;
-			matrix[i][j] = val;
+			matrix(i, j) = val;
 		}
 	}
 

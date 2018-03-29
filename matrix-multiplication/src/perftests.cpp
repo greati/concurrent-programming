@@ -35,7 +35,7 @@ int main(int argn, char * args[]) {
         std::cout << "-- Multiplying sequential..." << std::endl;
         PerfStats seqStats = MatTestUtils::mult_perf_stats(a, b, c, reps);
         std::cout << "-- Multiplying concurrent..." << std::endl;
-        a.set_multiplier(new Math::ConcurrentMatrixMultiplier<int>{});
+        a.set_multiplier(std::make_unique<Math::ConcurrentMatrixMultiplier<int>>());
         PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps);
         std::cout << "-- Writing to file..." << std::endl;
         results << std::setw(col_width) << std::to_string(i) << std::setw(col_width) 

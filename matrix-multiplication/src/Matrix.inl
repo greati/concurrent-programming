@@ -4,114 +4,67 @@
 #include <cmath>
 
 template<typename TField>
-Math::Matrix<TField>::Matrix(const int & _m, const int & _n, 
-		    const TField & _diag, const TField & _others) : 
-                    rows {_m}, cols {_n} {
+Math::Matrix<TField>::Matrix(const unsigned & _m, const unsigned & _n,
+    const TField & _initial) : rows{_m}, cols{_n} 
+{
+    if (_m <= 0 || _n <= 0)
+        throw std::logic_error("A matrix must have a positive number of rows and columns.");
 
-    // Test nullity of number of cols and rows
-    if (!_m or !_n) 
-        throw std::logic_error("A matrix cannot have zero rows or columns.");
-
-    // Create data and populate it
     data = new TField* [_m];
-    for (int i = 0; i < _m; ++i) {
+    for (auto i = 0u; i < _m; ++i) {
         *(data + i) = new TField[_n];
-        for (int j = 0; j < _n; ++j) {
-			if (i == j)
-				data[i][j] = _diag;
-			else
-				data[i][j] = _others;
-        }
+        for (auto j = 0u; j < _n; ++j)
+            data[i][j] = _initial;
     }
 }
-
-template<typename TField>
-Math::Matrix<TField>::Matrix(const int & _m, const int & _n,
-		const TField & _initial) : Matrix(_m, _n, _initial, _initial) {/* empty */}
 
 template<typename TField>
 Math::Matrix<TField>::Matrix(const Matrix<TField> & from) :  
-    rows {from.rows}, cols {from.cols} {
+    rows{from.rows}, cols{from.cols} {
     this->data = new TField * [from.rows]; 
-    for (int i = 0; i < from.rows; ++i)
+    for (auto i = 0u; i < from.rows; ++i)
         this->data[i] = new TField[from.cols];
-    for (int i = 0; i < from.rows; ++i) {
-        for (int j = 0; j < from.cols; ++j) {
-            this->data[i][j] = from[i][j];
+
+    for (auto i = 0u; i < from.rows; ++i) {
+        for (auto j = 0u; j < from.cols; ++j) {
+            this->data[i][j] = from(i, j);
         }
     }
-}
-
-template<typename TField>
-Math::Matrix<TField>::Matrix(const int & n, const TField * array) : Matrix(n, 1, array[0]) {
-	for (int i = 0; i < n; ++i)
-		this->data[i][0] = array[i];
-}
-
-template<typename TField>
-Math::Matrix<TField>::Matrix(const std::initializer_list<std::initializer_list<TField>> & l) : 
-    data{nullptr} {
-    this->rows = l.size();
-    
-    if (this->rows == 0)
-        throw std::invalid_argument("Zero lines not allowed!");
-    else {
-        this->cols = l.begin()->size();
-        if (this->cols == 0)
-            throw std::invalid_argument("Zero columns not allowed!");
-        else {
-            this->data = new TField * [this->rows]; 
-            for (int i = 0; i < this->rows; ++i)
-                this->data[i] = new TField[this->cols];
-        }
-    }
-
-    int i = 0; 
-    for (auto r : l) {
-       int j = 0;
-       if ((int) r.size() != this->cols)
-           throw std::logic_error("Some element of the matrix is missing!");
-       for (auto e : r) {
-           data[i][j] = e;
-           ++j;
-       }
-       ++i;
-    } 
 }
 
 template<typename TField>
 Math::Matrix<TField>::~Matrix() {
     if (data != nullptr) {
-        for (int i = 0; i < this->rows; ++i)
+        for (auto i = 0u; i < this->rows; ++i)
             delete [] this->data[i];
         delete [] this->data;
     }
-    if (multiplier != nullptr)
-        delete multiplier;
 }
 
 template<typename TField>
-void Math::Matrix<TField>::set(const int & i, const int & j, const TField & value) {
-    data[i][j] = value;
+TField& Math::Matrix<TField>::operator() (const unsigned& i, const unsigned& j)
+{
+  if (i >= rows || j >= cols)
+    throw std::logic_error("Accessing matrix position out of bounds");
+  return data[i][j];
 }
 
 template<typename TField>
-const TField & Math::Matrix<TField>::at(const int & i, const int & j) const {
-    return data[i][j];
+TField Math::Matrix<TField>::operator() (const unsigned& i, const unsigned& j) const
+{
+  if (i >= rows || i >= cols)
+    throw std::logic_error("Accessing matrix position out of bounds");
+  return data[i][j];
 }
 
 template<typename TField>
-TField * & Math::Matrix<TField>::operator[](const int & i) {
-    if (i < 0 || i >= rows)
-            throw std::logic_error("Accessing position out of bounds.");
-    return data[i];
+void Math::Matrix<TField>::set(const unsigned & i, const unsigned & j, const TField & value) {
+    this(i, j) = value;
 }
 
 template<typename TField>
-TField * Math::Matrix<TField>::operator[](const int & i) const {
-    if (i < 0 || i >= rows)
-            throw std::logic_error("Accessing position out of bounds.");
-    return data[i];
+TField Math::Matrix<TField>::at(const unsigned & i, const unsigned & j) const {
+    return this(i, j);
 }
 
 template<typename TField>
@@ -120,27 +73,26 @@ Math::Matrix<TField> Math::Matrix<TField>::operator*(const Matrix<TField> & _rhs
 }
 
 template<typename TField>
-void Math::Matrix<TField>::set_multiplier(MatrixMultiplier<TField> * _multiplier) {
-    if (this->multiplier != nullptr)
-        delete this->multiplier;
-    this->multiplier = _multiplier;
+void Math::Matrix<TField>::set_multiplier(std::unique_ptr<MatrixMultiplier<TField>> mult) {
+    this->multiplier = std::move(mult);
 }
 
 template<typename TField>
 Math::Matrix<TField> & Math::Matrix<TField>::operator=(Matrix<TField> m) {
     if (m.cols != this->cols || m.rows != this->rows) {
-		if (data != nullptr) {
-			for (int i = 0; i < this->rows; ++i)
-				delete [] this->data[i];
-			delete [] this->data;
-		}
+        if (data != nullptr) {
+            for (auto i = 0u; i < this->rows; ++i)
+                delete [] this->data[i];
+            delete [] this->data;
+        }
         this->data = new TField * [m.rows]; 
-        for (int i = 0; i < m.rows; ++i)
+        for (auto i = 0u; i < m.rows; ++i)
             this->data[i] = new TField[m.cols];
     }
-    for (int i = 0; i < m.rows; ++i) {
-        for (int j = 0; j < m.cols; ++j) {
-            this->data[i][j] = m[i][j];
+
+    for (auto i = 0u; i < m.rows; ++i) {
+        for (auto j = 0u; j < m.cols; ++j) {
+            this->data[i][j] = m(i, j);
         }
     }
     this->cols = m.cols;
@@ -150,9 +102,9 @@ Math::Matrix<TField> & Math::Matrix<TField>::operator=(Matrix<TField> m) {
 
 template<typename TField>
 std::ostream& Math::operator<<(std::ostream& os, const Math::Matrix<TField>& matrix) {
-    for (int i = 0; i < matrix.rows; ++i) {
-        for (int j = 0; j < matrix.cols; ++j) {
-            os << std::setprecision(6) << matrix[i][j] << " ";
+    for (auto i = 0u; i < matrix.rows; ++i) {
+        for (auto j = 0u; j < matrix.cols; ++j) {
+            os << std::setprecision(6) << matrix(i, j) << " ";
         }
         os << std::endl;
     }

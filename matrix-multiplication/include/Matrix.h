@@ -2,6 +2,7 @@
 #define _MATRIX_
 
 #include <iostream>
+#include <memory>
 #include <functional>
 #include <vector>
 #include "MatrixMultiplier.h"
@@ -16,11 +17,11 @@ namespace Math {
     /**
      * Represents an m x n matrix, with its data and some operations.
      *
-     * It is, actually, a template class, which receives, as template
-     * argument, the field of the vector space to which the represented
+     * It is a class which receives, as template argument, 
+     * the field of the vector space to which the represented
      * matrix belongs. This is a simplified matrix class, which
-     * presents only the multiplication operation (through an Strategy)
-     * and some auxiliar methods, such as matrix assignment and
+     * presents only the multiplication operation (through a Strategy)
+     * and some auxiliary methods, such as matrix assignment and
      * element access and modification. 
      *
      * @author      Vitor Greati, Carlos Vieira
@@ -33,49 +34,21 @@ namespace Math {
         private:
 
             TField ** data;                                     /*< Matrix data. */
-            MatrixMultiplier<TField> * multiplier = 
-                new SequentialMatrixMultiplier<TField>{};       /*< Multiplication strategy. */
+            std::unique_ptr<MatrixMultiplier<TField>> multiplier = 
+                std::make_unique<SequentialMatrixMultiplier<TField>>();       /*< Multiplication strategy. */
 
         public:
             
-            int rows;               /*< Number of rows. */
-            int cols;               /*< Number of columns. */
+            unsigned int rows;               /*< Number of rows. */
+            unsigned int cols;               /*< Number of columns. */
 
             /**
-             * Constructor for an m x n matrix, accepting values for diagonal elements and others.
-             * 
-             * It accepts two values: _diag, which is the value for filling
-             * the diagonal; and _others, which fills the other matrix
-             * positions.
-             *
-             * @param _m        Number of lines.
-             * @param _n        Number of columns.
-             * @param _diag	Initial value for cells in the diagonal.
-             * @param _others	Initial value for the other cells.
-             * */
-            Matrix (const int & _m, const int & _n, const TField & _diag, const TField & _others);
-
-            /**
-             * Constructor for an m x n matrix, with an initial elements.
+             * Constructor for an m x n matrix, with an initial value for all elements.
              *
              * @param _m        Number of lines and columns.
-             * @param _initial  Fill the matrix with this element.
+             * @param _initial  Fill the matrix with this value.
              * */
-            Matrix (const int & _m, const int & _n, const TField & _initial);
-
-            /**
-             * Constructor which takes an initializer list.
-             *
-             * @param l         Initializer list with matrix elements.
-             * */
-            Matrix(const std::initializer_list<std::initializer_list<TField>> & l);
-
-            /**
-             * Constructor for a one dimensional matrix from a native array.
-             *
-             * @param l         Array with elements of the vector.
-             * */
-            Matrix(const int & n, const TField * array);
+            Matrix(const unsigned & _m, const unsigned & _n, const TField & _initial);
 
             /**
              * Copy constructor.
@@ -89,13 +62,18 @@ namespace Math {
              * */
             ~Matrix();
 
+
+            TField& operator() (const unsigned& i, const unsigned& j);
+
+            TField operator() (const unsigned& i, const unsigned& j) const;
+
             /**
              * Access function: takes the element data[i][j].
              *
              * @param i     Element row.
              * @param j     Element column.
              * */
-            const TField & at(const int & i, const int & j) const; 
+            TField at(const unsigned & i, const unsigned & j) const;
 
             /**
              * Set function: set data[i][j] to a value.
@@ -104,33 +82,7 @@ namespace Math {
              * @param j     Element column.
              * @param value New value.
              * */
-            void set(const int & i, const int & j, const TField & value);
-
-            /**
-             * Operator [] for accessing rows of a matrix. This
-             * returns a reference.
-             * 
-             * Since arrays have [] access defined, 
-             * this overload allows using [][] for accessing and
-             * modifying matrix elements.
-             *
-             * @param j		Row index.
-             * @return 		Pointer to the first element of the row.
-             * */
-            TField * & operator[](const int & i);
-
-            /**
-             * Operator [] for accessing rows of a matrix; this
-             * returns a copy.
-             *
-             * Since arrays have [] access defined, 
-             * this overload allows using [][] for accessing
-             * matrix elements.
-             *
-             * @param j		Row index.
-             * @return 		Pointer to the first element of the row.
-             * */
-            TField * operator[](const int & i) const;
+            void set(const unsigned & i, const unsigned & j, const TField & value);
 
             /**
              * Operator for multiplication of matrices.
@@ -142,9 +94,9 @@ namespace Math {
             /**
              * Set the strategy for multiplication.
              *
-             * @param multiplier The new multiplier.
+             * @param mult The new multiplier.
              * */
-            void set_multiplier(MatrixMultiplier<TField> * multiplier);
+            void set_multiplier(std::unique_ptr<MatrixMultiplier<TField>> mult);
 
             /**
              * Operator for assignment.

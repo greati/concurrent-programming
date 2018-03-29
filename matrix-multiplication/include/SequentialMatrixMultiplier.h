@@ -27,10 +27,10 @@ namespace Math {
              * @param prod      Product matrix.
              * */
             void multiply(const Matrix<TField>& A, const Matrix<TField>& B, Matrix<TField>& prod) {
-                for (int i = 0; i < A.rows; ++i) {
-                    for (int j = 0; j < B.cols; ++j) {
-                        for (int k = 0; k < A.cols; ++k) {
-                            prod[i][j] = prod[i][j] + A[i][k] * B[k][j]; 
+                for (auto i = 0u; i < A.rows; ++i) {
+                    for (auto j = 0u; j < B.cols; ++j) {
+                        for (auto k = 0u; k < A.cols; ++k) {
+                            prod(i,j) = prod(i,j) + A(i,k) * B(k,j); 
                         }   
                     }
                 }
