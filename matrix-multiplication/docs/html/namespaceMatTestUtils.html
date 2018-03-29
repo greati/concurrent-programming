@@ -82,8 +82,8 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a8ce892071d861e65dd62ef377efaaa6b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#a8ce892071d861e65dd62ef377efaaa6b">ExecType</a> { <b>SEQUENTIAL</b> = 0, 
-<b>CONCURRENT</b> = 1
+<tr class="memitem:a8ce892071d861e65dd62ef377efaaa6b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#a8ce892071d861e65dd62ef377efaaa6b">ExecType</a> { <a class="el" href="namespaceMatTestUtils.html#a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4">SEQUENTIAL</a> = 0, 
+<a class="el" href="namespaceMatTestUtils.html#a8ce892071d861e65dd62ef377efaaa6ba5badfe0e296c0508584ff1561872a74c">CONCURRENT</a> = 1
  }</td></tr>
 <tr class="memdesc:a8ce892071d861e65dd62ef377efaaa6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Types of multipliers.  <a href="namespaceMatTestUtils.html#a8ce892071d861e65dd62ef377efaaa6b">More...</a><br /></td></tr>
 <tr class="separator:a8ce892071d861e65dd62ef377efaaa6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,11 +108,9 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ac809b72319e3d38f960650baf31dc1e6"><td class="memItemLeft" align="right" valign="top"><a id="ac809b72319e3d38f960650baf31dc1e6"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>min_n</b> = 4</td></tr>
+<tr class="memitem:ac809b72319e3d38f960650baf31dc1e6"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#ac809b72319e3d38f960650baf31dc1e6">min_n</a> = 4</td></tr>
 <tr class="separator:ac809b72319e3d38f960650baf31dc1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aae57ce6440d799106e6f95f6094b2d6d"><td class="memItemLeft" align="right" valign="top"><a id="aae57ce6440d799106e6f95f6094b2d6d"></a>
-const int&#160;</td><td class="memItemRight" valign="bottom"><b>max_n</b> = 2048</td></tr>
+<tr class="memitem:aae57ce6440d799106e6f95f6094b2d6d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#aae57ce6440d799106e6f95f6094b2d6d">max_n</a> = 2048</td></tr>
 <tr class="separator:aae57ce6440d799106e6f95f6094b2d6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -135,6 +133,12 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>max_n</b> = 2048
 
 <p>Types of multipliers. </p>
 <p>Used when it is necessary to check what multiplication approach was requested. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4"></a>SEQUENTIAL&#160;</td><td class="fielddoc"><p>Sequential approach. </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a8ce892071d861e65dd62ef377efaaa6ba5badfe0e296c0508584ff1561872a74c"></a>CONCURRENT&#160;</td><td class="fielddoc"><p>Concurrent approach. </p>
+</td></tr>
+</table>
 
 </div>
 </div>
@@ -345,6 +349,37 @@ const int&#160;</td><td class="memItemRight" valign="bottom"><b>max_n</b> = 2048
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aae57ce6440d799106e6f95f6094b2d6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae57ce6440d799106e6f95f6094b2d6d">&#9670;&nbsp;</a></span>max_n</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MatTestUtils::max_n = 2048</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Dimension of the largest matrix in the test set. </p>
+
+</div>
+</div>
+<a id="ac809b72319e3d38f960650baf31dc1e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac809b72319e3d38f960650baf31dc1e6">&#9670;&nbsp;</a></span>min_n</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MatTestUtils::min_n = 4</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Dimension of the smaller matrix in the test set. </p>
 
 </div>
 </div>

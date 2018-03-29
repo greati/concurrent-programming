@@ -13,8 +13,8 @@ struct \mbox{\hyperlink{structMatTestUtils_1_1PerfStats}{Perf\+Stats}}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
-enum \mbox{\hyperlink{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6b}{Exec\+Type}} \{ {\bfseries S\+E\+Q\+U\+E\+N\+T\+I\+AL} = 0, 
-{\bfseries C\+O\+N\+C\+U\+R\+R\+E\+NT} = 1
+enum \mbox{\hyperlink{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6b}{Exec\+Type}} \{ \mbox{\hyperlink{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4}{S\+E\+Q\+U\+E\+N\+T\+I\+AL}} = 0, 
+\mbox{\hyperlink{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba5badfe0e296c0508584ff1561872a74c}{C\+O\+N\+C\+U\+R\+R\+E\+NT}} = 1
  \}
 \begin{DoxyCompactList}\small\item\em Types of multipliers. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Functions}
@@ -33,11 +33,9 @@ std\+::string \mbox{\hyperlink{namespaceMatTestUtils_a9e032c504f598952db985df790
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{namespaceMatTestUtils_ac809b72319e3d38f960650baf31dc1e6}\label{namespaceMatTestUtils_ac809b72319e3d38f960650baf31dc1e6}} 
-const int {\bfseries min\+\_\+n} = 4
+const int \mbox{\hyperlink{namespaceMatTestUtils_ac809b72319e3d38f960650baf31dc1e6}{min\+\_\+n}} = 4
 \item 
-\mbox{\Hypertarget{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}\label{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}} 
-const int {\bfseries max\+\_\+n} = 2048
+const int \mbox{\hyperlink{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}{max\+\_\+n}} = 2048
 \end{DoxyCompactItemize}
 
 
@@ -65,7 +63,17 @@ Vitor Greati, Carlos Vieira
 
 Types of multipliers. 
 
-Used when it is necessary to check what multiplication approach was requested. 
+Used when it is necessary to check what multiplication approach was requested. \begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+Q\+U\+E\+N\+T\+I\+AL@{S\+E\+Q\+U\+E\+N\+T\+I\+AL}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}\index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!S\+E\+Q\+U\+E\+N\+T\+I\+AL@{S\+E\+Q\+U\+E\+N\+T\+I\+AL}}}\mbox{\Hypertarget{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4}\label{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4}} 
+S\+E\+Q\+U\+E\+N\+T\+I\+AL&Sequential approach. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{C\+O\+N\+C\+U\+R\+R\+E\+NT@{C\+O\+N\+C\+U\+R\+R\+E\+NT}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}\index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!C\+O\+N\+C\+U\+R\+R\+E\+NT@{C\+O\+N\+C\+U\+R\+R\+E\+NT}}}\mbox{\Hypertarget{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba5badfe0e296c0508584ff1561872a74c}\label{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba5badfe0e296c0508584ff1561872a74c}} 
+C\+O\+N\+C\+U\+R\+R\+E\+NT&Concurrent approach. \\
+\hline
+
+\end{DoxyEnumFields}
+
 
 \subsection{Function Documentation}
 \mbox{\Hypertarget{namespaceMatTestUtils_a9e032c504f598952db985df790a0bcaa}\label{namespaceMatTestUtils_a9e032c504f598952db985df790a0bcaa}} 
@@ -161,3 +169,19 @@ Read matrix from the a test file, as specified in the project description.
 {\em filename} & Filename. \\
 \hline
 \end{DoxyParams}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}\label{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}} 
+\index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!max\+\_\+n@{max\+\_\+n}}
+\index{max\+\_\+n@{max\+\_\+n}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}
+\subsubsection{\texorpdfstring{max\+\_\+n}{max\_n}}
+{\footnotesize\ttfamily const int Mat\+Test\+Utils\+::max\+\_\+n = 2048}
+
+Dimension of the largest matrix in the test set. \mbox{\Hypertarget{namespaceMatTestUtils_ac809b72319e3d38f960650baf31dc1e6}\label{namespaceMatTestUtils_ac809b72319e3d38f960650baf31dc1e6}} 
+\index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!min\+\_\+n@{min\+\_\+n}}
+\index{min\+\_\+n@{min\+\_\+n}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}
+\subsubsection{\texorpdfstring{min\+\_\+n}{min\_n}}
+{\footnotesize\ttfamily const int Mat\+Test\+Utils\+::min\+\_\+n = 4}
+
+Dimension of the smaller matrix in the test set. 

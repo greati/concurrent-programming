@@ -23,8 +23,8 @@
  * */
 namespace MatTestUtils {
 
-    extern const int min_n;             /*< Dimension of the smaller matrix in the test set.*/
-    extern const int max_n;             /*< Dimension of the largest matrix in the test set.*/
+    extern const int min_n;             /*!< Dimension of the smaller matrix in the test set.*/
+    extern const int max_n;             /*!< Dimension of the largest matrix in the test set.*/
 	
     /**
      * Types of multipliers.
@@ -33,8 +33,8 @@ namespace MatTestUtils {
      * was requested.
      * */
     enum ExecType {
-            SEQUENTIAL = 0,             /*< Sequential approach. */
-            CONCURRENT = 1              /*< Concurrent approach. */ 
+            SEQUENTIAL = 0,             /*!< Sequential approach. */
+            CONCURRENT = 1              /*!< Concurrent approach. */ 
     };
 
 
@@ -43,11 +43,11 @@ namespace MatTestUtils {
      * multiplication approaches.
      * */
     struct PerfStats {
-        double average = 0.0;                   /*< Average running time.*/
-        double maximum = 0.0;                   /*< Maximum running time.*/ 
-        double minimum = 0.0;                   /*< Minium running time. */
-        double stdeviation = 0.0;               /*< Standard deviation regarding the running times.*/
-        std::vector<double> running_times;      /*< Sequence of running times registered in the test. */
+        double average = 0.0;                   /*!< Average running time.*/
+        double maximum = 0.0;                   /*!< Maximum running time.*/ 
+        double minimum = 0.0;                   /*!< Minium running time. */
+        double stdeviation = 0.0;               /*!< Standard deviation regarding the running times.*/
+        std::vector<double> running_times;      /*!< Sequence of running times registered in the test. */
 
         /**
          * Simple constructor.
