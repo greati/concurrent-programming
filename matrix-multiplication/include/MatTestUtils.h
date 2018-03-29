@@ -103,7 +103,7 @@ namespace MatTestUtils {
      *
      * @param filename          Filename.
      * */
-    Math::Matrix<int> read_matrix(std::string filename);
+    Matrix<int> read_matrix(std::string filename);
 
     /** 
      * Multiplies AxB repeated times, returning
@@ -115,8 +115,8 @@ namespace MatTestUtils {
      * @param   C               Resulting nxn matrix.
      * @param   nrepeat         Number of repetitions.
      * */
-    PerfStats mult_perf_stats(const Math::Matrix<int>& A, const Math::Matrix<int>& B, 
-        Math::Matrix<int>& C, const int & nrepeat);
+    PerfStats mult_perf_stats(const Matrix<int>& A, const Matrix<int>& B, 
+        Matrix<int>& C, const int & nrepeat);
 }
 
 #endif

@@ -68,8 +68,8 @@ std::string MatTestUtils::get_filename(std::string matrix_name, int n) {
 	return filename.str();
 }
 
-PerfStats MatTestUtils::mult_perf_stats(const Math::Matrix<int>& A, const Math::Matrix<int>& B, 
-        Math::Matrix<int>& C, const int & nrepeat) {
+PerfStats MatTestUtils::mult_perf_stats(const Matrix<int>& A, const Matrix<int>& B, 
+        Matrix<int>& C, const int & nrepeat) {
 
     double average = 0.0, sum_variance = 0.0;
     double maximum = 0.0, minimum = std::numeric_limits<double>::max();
@@ -107,8 +107,8 @@ std::ostream& MatTestUtils::operator<<(std::ostream& os, const PerfStats& ps) {
     	<< std::to_string(ps.stdeviation);
 }
 
-Math::Matrix<int> MatTestUtils::read_matrix(std::string filename)
-{
+Matrix<int> MatTestUtils::read_matrix(std::string filename) {
+
 	std::ifstream file (filename);
 	if (!file.good()) {
 		auto error_msg = std::string(BOOST_CURRENT_FUNCTION);
@@ -119,7 +119,7 @@ Math::Matrix<int> MatTestUtils::read_matrix(std::string filename)
 	unsigned n, m;
 	file >> n >> m;
 
-    Math::Matrix<int> matrix {n, m, 0};
+    Matrix<int> matrix {n, m, 0};
 
 	for (auto i = 0u; i < n; ++i) {
 		for (auto j = 0u; j < m; ++j) {
@@ -129,5 +129,5 @@ Math::Matrix<int> MatTestUtils::read_matrix(std::string filename)
 		}
 	}
 
-        return matrix;
+    return matrix;
 }

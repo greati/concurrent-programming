@@ -10,12 +10,12 @@ int main(int argc, char const *argv[])
 		int n; MatTestUtils::ExecType method; bool write;
 		MatTestUtils::read_arguments(argc, argv, n, method, write);
 
-	    Math::Matrix<int> A = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",n));
-	    Math::Matrix<int> B = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",n));
-	    Math::Matrix<int> C {A.rows, B.cols, 0};
+	    Matrix<int> A = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",n));
+	    Matrix<int> B = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",n));
+	    Matrix<int> C {A.rows(), B.cols(), 0};
 
 	 	if (method == MatTestUtils::CONCURRENT)
-	        A.set_multiplier(std::make_unique<Math::ConcurrentMatrixMultiplier<int>>());
+	        A.set_multiplier(std::make_unique<ConcurrentMatrixMultiplier<int>>());
 
 	 	auto start = std::chrono::steady_clock::now();
 	    C = A*B;
@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 		if (write) {
 			auto filename = MatTestUtils::get_filename("C", n);
 			std::ofstream result_file(filename);
-	        result_file << C.rows << " " << C.cols << std::endl;
+	        result_file << C.rows() << " " << C.cols() << std::endl;
 	        result_file << C;
 			result_file.close();
 			std::cout << "output written to " << filename << std::endl;

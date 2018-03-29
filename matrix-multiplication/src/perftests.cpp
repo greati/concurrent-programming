@@ -8,7 +8,7 @@ using MatTestUtils::PerfStats;
 int main(int argn, char * args[]) {
 
     try {
-        Math::Matrix<int> matrix {0, 0, 0};
+
         if (argn < 2) {
             auto error_msg = std::string(BOOST_CURRENT_FUNCTION);
             error_msg += ": Missing results file argument.";
@@ -34,15 +34,15 @@ int main(int argn, char * args[]) {
         for (int i = init_size; i <= end_size; i = (i << 1)) {
             std::cout << "Starting for N = " << i << std::endl;
             std::cout << "-- Reading matrices..." << std::endl;
-            Math::Matrix<int> a = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",i));
-            Math::Matrix<int> b = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",i));
-            Math::Matrix<int> c {a.rows, b.cols, 0};
+            Matrix<int> a = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",i));
+            Matrix<int> b = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",i));
+            Matrix<int> c {a.rows(), b.cols(), 0};
             
             std::cout << "-- Multiplying sequential..." << std::endl;
             PerfStats seqStats = MatTestUtils::mult_perf_stats(a, b, c, reps);
 
             std::cout << "-- Multiplying concurrent..." << std::endl;
-            a.set_multiplier(std::make_unique<Math::ConcurrentMatrixMultiplier<int>>());
+            a.set_multiplier(std::make_unique<ConcurrentMatrixMultiplier<int>>());
             PerfStats concStats = MatTestUtils::mult_perf_stats(a, b, c, reps);
 
             std::cout << "-- Writing to file..." << std::endl;
