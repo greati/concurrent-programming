@@ -32,14 +32,14 @@ namespace Math {
 
         private:
 
-            TField ** data;                                     /*< Matrix data. */
+            TField ** data;                                     /*!< Matrix data. */
             MatrixMultiplier<TField> * multiplier = 
-                new SequentialMatrixMultiplier<TField>{};       /*< Multiplication strategy. */
+                new SequentialMatrixMultiplier<TField>{};       /*!< Multiplication strategy. */
 
         public:
             
-            int rows;               /*< Number of rows. */
-            int cols;               /*< Number of columns. */
+            int rows;           /*!< Number of rows. */
+            int cols;           /*!< Number of columns. */
 
             /**
              * Constructor for an m x n matrix, accepting values for diagonal elements and others.
