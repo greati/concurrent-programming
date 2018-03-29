@@ -33,7 +33,7 @@ namespace Math {
 
         private:
 
-            TField ** data;                                     /*< Matrix data. */
+            TField * data;                                     /*< Matrix data. */
             std::unique_ptr<MatrixMultiplier<TField>> multiplier = 
                 std::make_unique<SequentialMatrixMultiplier<TField>>();       /*< Multiplication strategy. */
 
