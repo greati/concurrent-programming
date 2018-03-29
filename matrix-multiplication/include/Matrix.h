@@ -8,24 +8,17 @@
 #include "SequentialMatrixMultiplier.h"
 
 /**
- * Represents an m x n matrix, with its data and operations.
+ * Represents an m x n matrix, with its data and some operations.
  *
  * It is, actually, a template class, which receives, as template
  * argument, the field of the vector space to which the represented
- * matrix belongs. 
+ * matrix belongs. This is a simplified matrix class, which
+ * presents only the multiplication operation (through an Strategy)
+ * and some auxiliar methods, such as matrix assignment and
+ * element access and modification. 
  *
- * Users of this template class must pay attention
- * to this field, since it will only make sense when it is 
- * a subset of real numbers (like int, float, double, long double) or
- * a class representing complex numbers. That's because 
- * this class applies the definition of multiplication
- * for those kinds of fields, and it uses addition and
- * multiplication for numbers. Of course, a generalization
- * for other objects with * and + operations defined will
- * work, but maybe without any meaning.
- *
- * @author      Vitor Greati, Vinicius Campos, Raquel Oliveira
- * @date        2017-03-07
+ * @author      Vitor Greati, Carlos Vieira
+ * @date        2018-04-29
  * @version     1.0
  * */
 
@@ -36,8 +29,9 @@ namespace Math {
 
         private:
 
-            TField ** data;          /*< Matrix data. */
-            MatrixMultiplier<TField> * multiplier = new SequentialMatrixMultiplier<TField>{};
+            TField ** data;                                     /*< Matrix data. */
+            MatrixMultiplier<TField> * multiplier = 
+                new SequentialMatrixMultiplier<TField>{};       /*< Multiplication strategy. */
 
         public:
             
@@ -45,37 +39,38 @@ namespace Math {
             int cols;               /*< Number of columns. */
 
             /**
-             * Constructor for an m x n matrix.
+             * Constructor for an m x n matrix, accepting values for diagonal elements and others.
              * 
              * It accepts two values: _diag, which is the value for filling
              * the diagonal; and _others, which fills the other matrix
              * positions.
              *
-             * @param _m            Number of lines.
-             * @param _n            Number of columns.
-             * @param _diag			Initial value for cells in the diagonal.
-             * @param _others		Initial value for the other cells.
+             * @param _m        Number of lines.
+             * @param _n        Number of columns.
+             * @param _diag	Initial value for cells in the diagonal.
+             * @param _others	Initial value for the other cells.
              * */
             Matrix (const int & _m, const int & _n, const TField & _diag, const TField & _others);
 
             /**
              * Constructor for an m x n matrix, with an initial elements.
              *
-             * @param _m            Number of lines and columns.
-                     * @param _initial		Fill the matrix with this element.
+             * @param _m        Number of lines and columns.
+             * @param _initial  Fill the matrix with this element.
              * */
             Matrix (const int & _m, const int & _n, const TField & _initial);
 
             /**
              * Constructor which takes an initializer list.
              *
-             * @param l             Initializer list with matrix elements.
+             * @param l         Initializer list with matrix elements.
              * */
             Matrix(const std::initializer_list<std::initializer_list<TField>> & l);
 
-                     /**
+            /**
              * Constructor for a one dimensional matrix from a native array.
-             * @param l             Array with elements of the vector.
+             *
+             * @param l         Array with elements of the vector.
              * */
             Matrix(const int & n, const TField * array);
 
@@ -109,29 +104,29 @@ namespace Math {
             void set(const int & i, const int & j, const TField & value);
 
             /**
-            * Operator [] for accessing rows of a matrix. This
-            * returns a reference.
-            *
-            * Since arrays have [] access defined, 
-            * this overload allows using [][] for accessing and
-            * modifying matrix elements.
-            *
-            * @param j		Row index.
-            * @return 		Pointer to the first element of the row.
-            **/
+             * Operator [] for accessing rows of a matrix. This
+             * returns a reference.
+             * 
+             * Since arrays have [] access defined, 
+             * this overload allows using [][] for accessing and
+             * modifying matrix elements.
+             *
+             * @param j		Row index.
+             * @return 		Pointer to the first element of the row.
+             * */
             TField * & operator[](const int & i);
 
             /**
-            * Operator [] for accessing rows of a matrix. This
-            * returns a copy.
-            *
-            * Since arrays have [] access defined, 
-            * this overload allows using [][] for accessing
-            * matrix elements.
-            *
-            * @param j		Row index.
-            * @return 		Pointer to the first element of the row.
-            **/
+             * Operator [] for accessing rows of a matrix; this
+             * returns a copy.
+             *
+             * Since arrays have [] access defined, 
+             * this overload allows using [][] for accessing
+             * matrix elements.
+             *
+             * @param j		Row index.
+             * @return 		Pointer to the first element of the row.
+             * */
             TField * operator[](const int & i) const;
 
             /**
@@ -142,7 +137,7 @@ namespace Math {
             Matrix<TField> operator*(const Matrix<TField> & _rhs) const;
 
             /**
-             * Set multiplier.
+             * Set the strategy for multiplication.
              *
              * @param multiplier The new multiplier.
              * */
