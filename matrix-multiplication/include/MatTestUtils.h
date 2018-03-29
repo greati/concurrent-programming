@@ -13,9 +13,9 @@
  * for testing different matrix multiplication approachs.
  *
  * This was specifically designed according to the
- * requirements of the proposed work. It has
+ * requirements of the proposed project. It has
  * methods for reading matrices from file in a fixed
- * format and testing them, generating 
+ * format, testing them, and generating 
  * statistics about the multiplication performance.
  *
  * @author Vitor Greati, Carlos Vieira
@@ -23,18 +23,18 @@
  * */
 namespace MatTestUtils {
 
+    extern const int col_width;
     extern const int min_n;             /*!< Dimension of the smaller matrix in the test set.*/
     extern const int max_n;             /*!< Dimension of the largest matrix in the test set.*/
 	
     /**
      * Types of multipliers.
      *
-     * Used when it is necessary to check what multiplication approach 
-     * was requested.
+     * Used to check what multiplication approach was requested.
      * */
     enum ExecType {
-            SEQUENTIAL = 0,             /*!< Sequential approach. */
-            CONCURRENT = 1              /*!< Concurrent approach. */ 
+        SEQUENTIAL = 0,             /*!< Sequential approach. */
+        CONCURRENT = 1              /*!< Concurrent approach. */ 
     };
 
 
@@ -69,7 +69,7 @@ namespace MatTestUtils {
     };
 
     /**
-     * Writes the performance statistics using a stream.
+     * Writes the performance statistics to a stream.
      *
      * @param os        Ouput stream.
      * @param ps        Performance statistics.
@@ -83,8 +83,8 @@ namespace MatTestUtils {
      * @param argc      Number of arguments.
      * @param argv      Arguments.
      * @param n         Matrix size.
-     * @param method    Required method.
-     * @param write     True if the result matrix must be written in a file.
+     * @param method    Required processing method.
+     * @param write     True if the result matrix must be written in a file (defaults to true).
      * */
     void read_arguments(int argc, char const *argv[], int& n, ExecType& method, bool& write);
 

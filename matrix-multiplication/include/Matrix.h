@@ -1,10 +1,9 @@
 #ifndef _MATRIX_
 #define _MATRIX_
 
-#include <iostream>
+#include <iomanip>
 #include <memory>
-#include <functional>
-#include <vector>
+#include <boost/current_function.hpp>
 #include "MatrixMultiplier.h"
 #include "SequentialMatrixMultiplier.h"
 
@@ -33,14 +32,21 @@ namespace Math {
 
         private:
 
-            TField * data;                                     /*< Matrix data. */
+            TField * data;                                              /*< Matrix data. */
             std::unique_ptr<MatrixMultiplier<TField>> multiplier = 
-                std::make_unique<SequentialMatrixMultiplier<TField>>();       /*< Multiplication strategy. */
+                std::make_unique<SequentialMatrixMultiplier<TField>>(); /*< Multiplication strategy. */
+
+            /**
+             * Swap the ownership of all parameters between two matrices.
+             *
+             * @param matrix    The matrix with which to swap parameters.
+             * */
+            void swap(Matrix<TField> matrix);
 
         public:
             
-            unsigned int rows;               /*< Number of rows. */
-            unsigned int cols;               /*< Number of columns. */
+            unsigned int rows;      /*< Number of rows. */
+            unsigned int cols;      /*< Number of columns. */
 
             /**
              * Constructor for an m x n matrix, with an initial value for all elements.
@@ -53,8 +59,9 @@ namespace Math {
             /**
              * Copy constructor.
              *
+             * @param _from     Matrix from which to copy.
              * */
-            Matrix(const Matrix<TField> & from);
+            Matrix(const Matrix<TField> & _from);
 
             /**
              * Destructor for deleting the matrix data.
@@ -68,7 +75,7 @@ namespace Math {
             TField operator() (const unsigned& i, const unsigned& j) const;
 
             /**
-             * Access function: takes the element data[i][j].
+             * Access function: returns the value of row i, column j.
              *
              * @param i     Element row.
              * @param j     Element column.
@@ -76,7 +83,7 @@ namespace Math {
             TField at(const unsigned & i, const unsigned & j) const;
 
             /**
-             * Set function: set data[i][j] to a value.
+             * Set function: set value of row i, column j.
              *
              * @param i     Element row.
              * @param j     Element column.
@@ -87,28 +94,30 @@ namespace Math {
             /**
              * Operator for multiplication of matrices.
              *
-             * @param _rhs  The matrix to right-multiply this matrix.
+             * @param rhs   The matrix to right-multiply this matrix.
              * */
-            Matrix<TField> operator*(const Matrix<TField> & _rhs) const;
+            Matrix<TField> operator*(const Matrix<TField> & rhs) const;
 
             /**
              * Set the strategy for multiplication.
              *
-             * @param mult The new multiplier.
+             * @param mult  The new multiplier.
              * */
             void set_multiplier(std::unique_ptr<MatrixMultiplier<TField>> mult);
 
             /**
              * Operator for assignment.
              *
-             * @param m     The current object will be equal to m.
+             * @param matrix    The current object will be equal to m.
              * */
-            Matrix<TField> & operator=(Matrix<TField> m);
+            Matrix<TField> & operator=(Matrix<TField> matrix);
 
     };
 
+    static const unsigned precision = 6;
+
     /**
-     * Allows printing the matrix by stream.
+     * Allows printing the matrix to a stream.
      *
      * @param os            Output stream.
      * @param matrix        Matrix to be printed.
