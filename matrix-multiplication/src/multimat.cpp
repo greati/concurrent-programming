@@ -1,36 +1,46 @@
 #include <iostream>
 #include <chrono>
 #include "MatTestUtils.h"
-
-using Mat::Matrix;
+#include "Matrix.h"
+#include "ConcurrentMatrixMultiplier.h"
 
 int main(int argc, char const *argv[])
 {
-	int n; MatTestUtils::ExecType method; bool write;
-	MatTestUtils::read_arguments(argc, argv, n, method, write);
+	try {
+		int n; MatTestUtils::ExecType method; bool write;
+		MatTestUtils::read_arguments(argc, argv, n, method, write);
 
-	Matrix a, b;
-	Mat::read_matrix(MatTestUtils::get_filename("A", n), a);
-	Mat::read_matrix(MatTestUtils::get_filename("B", n), b);
+	    Matrix<int> A = MatTestUtils::read_matrix(MatTestUtils::get_filename("A",n));
+	    Matrix<int> B = MatTestUtils::read_matrix(MatTestUtils::get_filename("B",n));
+	    Matrix<int> C {A.rows(), B.cols(), 0};
 
-	Matrix c;
- 	auto start = std::chrono::steady_clock::now();
- 	if (method == MatTestUtils::CONCURRENT)
-		Mat::concurrent_mult(a, b, c);
-	else
-		Mat::sequential_mult(a, b, c);
-	auto end = std::chrono::steady_clock::now();
+	 	if (method == MatTestUtils::CONCURRENT)
+	        A.set_multiplier(std::make_unique<ConcurrentMatrixMultiplier<int>>());
 
-	std::chrono::duration<double, std::milli> time(end-start);
-	std::cout << (method == MatTestUtils::CONCURRENT ? "concurrent" : "sequential") <<
-		" multiplication of matrixes of size " << n << "x" << n <<
-		" completed in " << time.count() << "ms" << std::endl;
+	 	auto start = std::chrono::steady_clock::now();
+	    C = A*B;
+		auto end = std::chrono::steady_clock::now();
 
-	if (write) {
-		std::ofstream result_file(MatTestUtils::get_filename("C", n));
-		Mat::print_matrix(c, result_file);
-		result_file.close();
-	}
+		std::chrono::duration<double, std::milli> time(end-start);
+		std::cout << (method == MatTestUtils::CONCURRENT ? "concurrent" : "sequential") <<
+			" multiplication of matrixes of size " << n << "x" << n <<
+			" completed in " << time.count() << "ms" << std::endl;
+
+		if (write) {
+			auto filename = MatTestUtils::get_filename("C", n);
+			std::ofstream result_file(filename);
+	        result_file << C.rows() << " " << C.cols() << std::endl;
+	        result_file << C;
+			result_file.close();
+			std::cout << "output written to " << filename << std::endl;
+		}
+    } catch (const std::exception& exc) {
+        std::cerr << exc.what() << std::endl;
+        return EXIT_FAILURE;
+    } catch (...) {
+        std::cerr << "Unknown failure" << std::endl;
+        return EXIT_FAILURE;
+    }   
 
 	return EXIT_SUCCESS;
 }

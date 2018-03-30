@@ -1,0 +1,68 @@
+\hypertarget{classMath_1_1SequentialMatrixMultiplier}{}\section{Math\+:\+:Sequential\+Matrix\+Multiplier$<$ T\+Field $>$ Class Template Reference}
+\label{classMath_1_1SequentialMatrixMultiplier}\index{Math\+::\+Sequential\+Matrix\+Multiplier$<$ T\+Field $>$@{Math\+::\+Sequential\+Matrix\+Multiplier$<$ T\+Field $>$}}
+
+
+Provides a method for multiplying matrices based on the mathematical definition sequentially (single-\/thread).  
+
+
+
+
+{\ttfamily \#include $<$Sequential\+Matrix\+Multiplier.\+h$>$}
+
+Inheritance diagram for Math\+:\+:Sequential\+Matrix\+Multiplier$<$ T\+Field $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMath_1_1SequentialMatrixMultiplier}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classMath_1_1SequentialMatrixMultiplier_ac50584976bf8efe3a0a755048c427753}{multiply}} (const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&A, const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&B, \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&prod)
+\begin{DoxyCompactList}\small\item\em Computes the product of two matrices using the algorithm from the mathematical definition, using a single thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\+Field$>$\newline
+class Math\+::\+Sequential\+Matrix\+Multiplier$<$ T\+Field $>$}
+
+Provides a method for multiplying matrices based on the mathematical definition sequentially (single-\/thread). 
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Carlos Vieira 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/03-\/28 
+\end{DoxyDate}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMath_1_1SequentialMatrixMultiplier_ac50584976bf8efe3a0a755048c427753}\label{classMath_1_1SequentialMatrixMultiplier_ac50584976bf8efe3a0a755048c427753}} 
+\index{Math\+::\+Sequential\+Matrix\+Multiplier@{Math\+::\+Sequential\+Matrix\+Multiplier}!multiply@{multiply}}
+\index{multiply@{multiply}!Math\+::\+Sequential\+Matrix\+Multiplier@{Math\+::\+Sequential\+Matrix\+Multiplier}}
+\subsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classMath_1_1SequentialMatrixMultiplier}{Math\+::\+Sequential\+Matrix\+Multiplier}}$<$ T\+Field $>$\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&}]{prod }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Computes the product of two matrices using the algorithm from the mathematical definition, using a single thread. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Left operand. \\
+\hline
+{\em B} & Right operand. \\
+\hline
+{\em prod} & Product matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Math\+::\+Matrix\+Multiplier$<$ T\+Field $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Sequential\+Matrix\+Multiplier.\+h\end{DoxyCompactItemize}

@@ -1,0 +1,47 @@
+\hypertarget{namespaceMath}{}\section{Math Namespace Reference}
+\label{namespaceMath}\index{Math@{Math}}
+
+
+Classes and definitions related to mathematical objects and operations.  
+
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classMath_1_1ConcurrentMatrixMultiplier}{Concurrent\+Matrix\+Multiplier}}
+\begin{DoxyCompactList}\small\item\em Provides a method for multiplying matrices based on the mathematical definition using multiple threads. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}
+\begin{DoxyCompactList}\small\item\em Represents an m x n matrix, with its data and some operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Matrix\+Multiplier}}
+\begin{DoxyCompactList}\small\item\em Represents an strategy for matrix multiplication. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classMath_1_1SequentialMatrixMultiplier}{Sequential\+Matrix\+Multiplier}}
+\begin{DoxyCompactList}\small\item\em Provides a method for multiplying matrices based on the mathematical definition sequentially (single-\/thread). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T\+Field $>$ }\\std\+::ostream \& \mbox{\hyperlink{namespaceMath_a03def80e3e35c7171610f7af0390032f}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$ \&matrix)
+\begin{DoxyCompactList}\small\item\em Allows printing the matrix by stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Classes and definitions related to mathematical objects and operations. 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespaceMath_a03def80e3e35c7171610f7af0390032f}\label{namespaceMath_a03def80e3e35c7171610f7af0390032f}} 
+\index{Math@{Math}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Math@{Math}}
+\subsubsection{\texorpdfstring{operator$<$$<$()}{operator<<()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+std\+::ostream \& Math\+::operator$<$$<$ (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{os,  }\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ T\+Field $>$ \&}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Allows printing the matrix by stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & Output stream. \\
+\hline
+{\em matrix} & \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}} to be printed. \\
+\hline
+\end{DoxyParams}

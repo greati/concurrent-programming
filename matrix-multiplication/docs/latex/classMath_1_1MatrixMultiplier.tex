@@ -1,0 +1,82 @@
+\hypertarget{classMath_1_1MatrixMultiplier}{}\section{Math\+:\+:Matrix\+Multiplier$<$ T\+Field $>$ Class Template Reference}
+\label{classMath_1_1MatrixMultiplier}\index{Math\+::\+Matrix\+Multiplier$<$ T\+Field $>$@{Math\+::\+Matrix\+Multiplier$<$ T\+Field $>$}}
+
+
+Represents an strategy for matrix multiplication.  
+
+
+
+
+{\ttfamily \#include $<$Matrix\+Multiplier.\+h$>$}
+
+Inheritance diagram for Math\+:\+:Matrix\+Multiplier$<$ T\+Field $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMath_1_1MatrixMultiplier}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \mbox{\hyperlink{classMath_1_1MatrixMultiplier_a880732c9b332798ef46e5d90f9b70625}{operator()}} (const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&A, const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&B)
+\begin{DoxyCompactList}\small\item\em Called when one wants to multiply two matrices. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classMath_1_1MatrixMultiplier_af43501cad28dfd11f8dd73dc25edd51b}{$\sim$\+Matrix\+Multiplier}} ()
+\begin{DoxyCompactList}\small\item\em Empty destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\+Field$>$\newline
+class Math\+::\+Matrix\+Multiplier$<$ T\+Field $>$}
+
+Represents an strategy for matrix multiplication. 
+
+Implements the function operator which, when called, checks if matrices are compatible for multiplication, and calls an abstract method, which represents the actual multiplication strategy when implemented by concrete subclasses.
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Carlos Vieira 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/03-\/29 
+\end{DoxyDate}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMath_1_1MatrixMultiplier_af43501cad28dfd11f8dd73dc25edd51b}\label{classMath_1_1MatrixMultiplier_af43501cad28dfd11f8dd73dc25edd51b}} 
+\index{Math\+::\+Matrix\+Multiplier@{Math\+::\+Matrix\+Multiplier}!````~Matrix\+Multiplier@{$\sim$\+Matrix\+Multiplier}}
+\index{````~Matrix\+Multiplier@{$\sim$\+Matrix\+Multiplier}!Math\+::\+Matrix\+Multiplier@{Math\+::\+Matrix\+Multiplier}}
+\subsubsection{\texorpdfstring{$\sim$\+Matrix\+Multiplier()}{~MatrixMultiplier()}}
+{\footnotesize\ttfamily template$<$typename T\+Field$>$ \\
+virtual \mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Math\+::\+Matrix\+Multiplier}}$<$ T\+Field $>$\+::$\sim$\mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Matrix\+Multiplier}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Empty destructor. 
+
+Allows destructing concrete classes. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMath_1_1MatrixMultiplier_a880732c9b332798ef46e5d90f9b70625}\label{classMath_1_1MatrixMultiplier_a880732c9b332798ef46e5d90f9b70625}} 
+\index{Math\+::\+Matrix\+Multiplier@{Math\+::\+Matrix\+Multiplier}!operator()@{operator()}}
+\index{operator()@{operator()}!Math\+::\+Matrix\+Multiplier@{Math\+::\+Matrix\+Multiplier}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename T\+Field$>$ \\
+\mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$T\+Field$>$ \mbox{\hyperlink{classMath_1_1MatrixMultiplier}{Math\+::\+Matrix\+Multiplier}}$<$ T\+Field $>$\+::operator() (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Matrix}}$<$ T\+Field $>$ \&}]{B }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Called when one wants to multiply two matrices. 
+
+First, perform all checks for the multiplication feasibility given the matrices, then calls a method for multiplication.
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Left operator. \\
+\hline
+{\em B} & Right operator. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Matrix\+Multiplier.\+h\end{DoxyCompactItemize}
