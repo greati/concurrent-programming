@@ -1,0 +1,94 @@
+\hypertarget{classConcurrentMatrixMultiplier}{}\section{Concurrent\+Matrix\+Multiplier$<$ T\+Field $>$ Class Template Reference}
+\label{classConcurrentMatrixMultiplier}\index{Concurrent\+Matrix\+Multiplier$<$ T\+Field $>$@{Concurrent\+Matrix\+Multiplier$<$ T\+Field $>$}}
+
+
+Provides a method for multiplying matrices based on the mathematical definition using multiple threads.  
+
+
+
+
+{\ttfamily \#include $<$Concurrent\+Matrix\+Multiplier.\+h$>$}
+
+Inheritance diagram for Concurrent\+Matrix\+Multiplier$<$ T\+Field $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classConcurrentMatrixMultiplier}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classConcurrentMatrixMultiplier_af4c7cedd919db3c918e48521df54b52e}{multiply}} (const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&A, const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&B, \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&C)
+\begin{DoxyCompactList}\small\item\em Computes the product of two matrices using the algorithm from the mathematical definition, using multiple threads. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classConcurrentMatrixMultiplier_ad712a4f89999ea327367f88502bc90d7}{compute\+\_\+mult\+\_\+line}} (const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&A, const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&B, \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&C, const int \&i)
+\begin{DoxyCompactList}\small\item\em Basic operation for computing one row of the product matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\+Field$>$\newline
+class Concurrent\+Matrix\+Multiplier$<$ T\+Field $>$}
+
+Provides a method for multiplying matrices based on the mathematical definition using multiple threads. 
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Carlos Vieira 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/03-\/28 
+\end{DoxyDate}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classConcurrentMatrixMultiplier_ad712a4f89999ea327367f88502bc90d7}\label{classConcurrentMatrixMultiplier_ad712a4f89999ea327367f88502bc90d7}} 
+\index{Concurrent\+Matrix\+Multiplier@{Concurrent\+Matrix\+Multiplier}!compute\+\_\+mult\+\_\+line@{compute\+\_\+mult\+\_\+line}}
+\index{compute\+\_\+mult\+\_\+line@{compute\+\_\+mult\+\_\+line}!Concurrent\+Matrix\+Multiplier@{Concurrent\+Matrix\+Multiplier}}
+\subsubsection{\texorpdfstring{compute\+\_\+mult\+\_\+line()}{compute\_mult\_line()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classConcurrentMatrixMultiplier}{Concurrent\+Matrix\+Multiplier}}$<$ T\+Field $>$\+::compute\+\_\+mult\+\_\+line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{C,  }\item[{const int \&}]{i }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Basic operation for computing one row of the product matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Left operand. \\
+\hline
+{\em B} & Right operand. \\
+\hline
+{\em C} & Product matrix. \\
+\hline
+{\em i} & Row index of the product matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classConcurrentMatrixMultiplier_af4c7cedd919db3c918e48521df54b52e}\label{classConcurrentMatrixMultiplier_af4c7cedd919db3c918e48521df54b52e}} 
+\index{Concurrent\+Matrix\+Multiplier@{Concurrent\+Matrix\+Multiplier}!multiply@{multiply}}
+\index{multiply@{multiply}!Concurrent\+Matrix\+Multiplier@{Concurrent\+Matrix\+Multiplier}}
+\subsubsection{\texorpdfstring{multiply()}{multiply()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classConcurrentMatrixMultiplier}{Concurrent\+Matrix\+Multiplier}}$<$ T\+Field $>$\+::multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{C }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Computes the product of two matrices using the algorithm from the mathematical definition, using multiple threads. 
+
+Allocates one thread for each product row computation. Must be used with caution, since big matrices may surpass some operation system limits when dealing with threads.
+
+
+\begin{DoxyParams}{Parameters}
+{\em A} & Left operand. \\
+\hline
+{\em B} & Right operand. \\
+\hline
+{\em C} & Product matrix. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classMatrixMultiplier}{Matrix\+Multiplier$<$ T\+Field $>$}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/Concurrent\+Matrix\+Multiplier.\+h\end{DoxyCompactItemize}

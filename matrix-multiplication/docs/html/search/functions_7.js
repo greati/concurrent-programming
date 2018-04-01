@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['set',['set',['../classMath_1_1Matrix.html#aa45b37d9f91280cee76233e37975046b',1,'Math::Matrix']]],
-  ['set_5fmultiplier',['set_multiplier',['../classMath_1_1Matrix.html#a09f512babb6fb371f3b3978e89e4a05b',1,'Math::Matrix']]]
+  ['set',['set',['../classMatrix.html#ad76d9febbbb81d828c9a534858b04283',1,'Matrix']]],
+  ['set_5fmultiplier',['set_multiplier',['../classMatrix.html#ac895b4ba9b119d16219b075675f581b4',1,'Matrix']]]
 ];

@@ -1,0 +1,288 @@
+\hypertarget{classMatrix}{}\section{Matrix$<$ T\+Field $>$ Class Template Reference}
+\label{classMatrix}\index{Matrix$<$ T\+Field $>$@{Matrix$<$ T\+Field $>$}}
+
+
+Represents an m x n matrix, with its data and some operations.  
+
+
+
+
+{\ttfamily \#include $<$Matrix.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classMatrix_aaf53d2ed43916bdff67dde343acc2d9a}{Matrix}} (const unsigned \&m, const unsigned \&n, const T\+Field \&initial)
+\begin{DoxyCompactList}\small\item\em Constructor for an m x n matrix, with an initial value for all elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMatrix_ac6bf5bf423a6d56ce31e8659de788c54}{Matrix}} (const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&from)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classMatrix_a3474dab2c6b05e89bdfaf3270e5081ec}\label{classMatrix_a3474dab2c6b05e89bdfaf3270e5081ec}} 
+\mbox{\hyperlink{classMatrix_a3474dab2c6b05e89bdfaf3270e5081ec}{$\sim$\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for deleting the matrix data. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classMatrix_a0e6439550b0aa4f6d66c5a31bfd6405c}{rows}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of rows. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classMatrix_aec5c893960915183a1bf8eace12a45ac}{cols}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of cols. \end{DoxyCompactList}\item 
+unsigned int \mbox{\hyperlink{classMatrix_aa93bff81f970ace86444f3f10125f4e2}{ostream\+\_\+precision}} () const
+\begin{DoxyCompactList}\small\item\em Get the precision for printing the matrix entries. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classMatrixMultiplier}{Matrix\+Multiplier}}$<$ T\+Field $>$ $>$ \mbox{\hyperlink{classMatrix_a8b97189db83694ee636a3a5102eef151}{multiplier}} () const
+\begin{DoxyCompactList}\small\item\em Get multiplication strategy. \end{DoxyCompactList}\item 
+T\+Field \& \mbox{\hyperlink{classMatrix_a9152e170e400598d3ced52e7b70e2d8b}{operator()}} (const unsigned \&i, const unsigned \&j)
+\begin{DoxyCompactList}\small\item\em Access specific elements by row and column, for assignment. \end{DoxyCompactList}\item 
+T\+Field \mbox{\hyperlink{classMatrix_a4d5a4a14c020275796dfa8c918badd7d}{operator()}} (const unsigned \&i, const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Access specific elements by row and column, for retrieval. \end{DoxyCompactList}\item 
+T\+Field \mbox{\hyperlink{classMatrix_acafe521165ef5c2204fb621a52feecc6}{at}} (const unsigned \&i, const unsigned \&j) const
+\begin{DoxyCompactList}\small\item\em Access function\+: returns the value of row i, column j. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMatrix_ad76d9febbbb81d828c9a534858b04283}{set}} (const unsigned \&i, const unsigned \&j, const T\+Field \&value)
+\begin{DoxyCompactList}\small\item\em Set function\+: set value of row i, column j. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \mbox{\hyperlink{classMatrix_a76e19b560ed401d2b87f7c275533e9fb}{operator$\ast$}} (const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&rhs) const
+\begin{DoxyCompactList}\small\item\em Operator for multiplication of matrices. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classMatrix_ac895b4ba9b119d16219b075675f581b4}{set\+\_\+multiplier}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classMatrixMultiplier}{Matrix\+Multiplier}}$<$ T\+Field $>$$>$ mult)
+\begin{DoxyCompactList}\small\item\em Set the strategy for multiplication. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \& \mbox{\hyperlink{classMatrix_ae8c4a30a41040e1d7ced1d76884e9c63}{operator=}} (\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ matrix)
+\begin{DoxyCompactList}\small\item\em Operator for assignment. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T\+Field$>$\newline
+class Matrix$<$ T\+Field $>$}
+
+Represents an m x n matrix, with its data and some operations. 
+
+It is a template class which takes, as template argument, the field of the vector space to which the represented matrix belongs. This is a simplified matrix class, which presents only the multiplication operation (through a Strategy) and some auxiliary methods, such as matrix assignment and element access and modification.
+
+\begin{DoxyAuthor}{Author}
+Vitor Greati, Carlos Vieira 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2018-\/04-\/29 
+\end{DoxyDate}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classMatrix_aaf53d2ed43916bdff67dde343acc2d9a}\label{classMatrix_aaf53d2ed43916bdff67dde343acc2d9a}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::\mbox{\hyperlink{classMatrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const unsigned \&}]{m,  }\item[{const unsigned \&}]{n,  }\item[{const T\+Field \&}]{initial }\end{DoxyParamCaption})}
+
+
+
+Constructor for an m x n matrix, with an initial value for all elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Number of lines. \\
+\hline
+{\em n} & Number of columns. \\
+\hline
+{\em initial} & Fill the matrix with this value. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_ac6bf5bf423a6d56ce31e8659de788c54}\label{classMatrix_ac6bf5bf423a6d56ce31e8659de788c54}} 
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\index{Matrix@{Matrix}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{Matrix()}{Matrix()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::\mbox{\hyperlink{classMatrix}{Matrix}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{from }\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em from} & \mbox{\hyperlink{classMatrix}{Matrix}} from which to copy. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classMatrix_acafe521165ef5c2204fb621a52feecc6}\label{classMatrix_acafe521165ef5c2204fb621a52feecc6}} 
+\index{Matrix@{Matrix}!at@{at}}
+\index{at@{at}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{at()}{at()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+T\+Field \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::at (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Access function\+: returns the value of row i, column j. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Element row. \\
+\hline
+{\em j} & Element column. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_aec5c893960915183a1bf8eace12a45ac}\label{classMatrix_aec5c893960915183a1bf8eace12a45ac}} 
+\index{Matrix@{Matrix}!cols@{cols}}
+\index{cols@{cols}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{cols()}{cols()}}
+{\footnotesize\ttfamily template$<$typename T\+Field$>$ \\
+unsigned int \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::cols (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of cols. 
+
+\begin{DoxyReturn}{Returns}
+Number of cols. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_a8b97189db83694ee636a3a5102eef151}\label{classMatrix_a8b97189db83694ee636a3a5102eef151}} 
+\index{Matrix@{Matrix}!multiplier@{multiplier}}
+\index{multiplier@{multiplier}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{multiplier()}{multiplier()}}
+{\footnotesize\ttfamily template$<$typename T\+Field$>$ \\
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classMatrixMultiplier}{Matrix\+Multiplier}}$<$T\+Field$>$ $>$ \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::multiplier (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get multiplication strategy. 
+
+\begin{DoxyReturn}{Returns}
+The multiplication strategy. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_a9152e170e400598d3ced52e7b70e2d8b}\label{classMatrix_a9152e170e400598d3ced52e7b70e2d8b}} 
+\index{Matrix@{Matrix}!operator()@{operator()}}
+\index{operator()@{operator()}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+T\+Field \& \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption})}
+
+
+
+Access specific elements by row and column, for assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Element row. \\
+\hline
+{\em j} & Element column. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_a4d5a4a14c020275796dfa8c918badd7d}\label{classMatrix_a4d5a4a14c020275796dfa8c918badd7d}} 
+\index{Matrix@{Matrix}!operator()@{operator()}}
+\index{operator()@{operator()}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+T\+Field \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::operator() (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j }\end{DoxyParamCaption}) const}
+
+
+
+Access specific elements by row and column, for retrieval. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Element row. \\
+\hline
+{\em j} & Element column. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_a76e19b560ed401d2b87f7c275533e9fb}\label{classMatrix_a76e19b560ed401d2b87f7c275533e9fb}} 
+\index{Matrix@{Matrix}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \&}]{rhs }\end{DoxyParamCaption}) const}
+
+
+
+Operator for multiplication of matrices. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rhs} & The matrix to right-\/multiply this matrix. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_ae8c4a30a41040e1d7ced1d76884e9c63}\label{classMatrix_ae8c4a30a41040e1d7ced1d76884e9c63}} 
+\index{Matrix@{Matrix}!operator=@{operator=}}
+\index{operator=@{operator=}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$ \& \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$}]{matrix }\end{DoxyParamCaption})}
+
+
+
+Operator for assignment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em matrix} & The current object will be equal to m. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_aa93bff81f970ace86444f3f10125f4e2}\label{classMatrix_aa93bff81f970ace86444f3f10125f4e2}} 
+\index{Matrix@{Matrix}!ostream\+\_\+precision@{ostream\+\_\+precision}}
+\index{ostream\+\_\+precision@{ostream\+\_\+precision}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{ostream\+\_\+precision()}{ostream\_precision()}}
+{\footnotesize\ttfamily template$<$typename T\+Field$>$ \\
+unsigned int \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::ostream\+\_\+precision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the precision for printing the matrix entries. 
+
+\begin{DoxyReturn}{Returns}
+The precision for ostream printing. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_a0e6439550b0aa4f6d66c5a31bfd6405c}\label{classMatrix_a0e6439550b0aa4f6d66c5a31bfd6405c}} 
+\index{Matrix@{Matrix}!rows@{rows}}
+\index{rows@{rows}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{rows()}{rows()}}
+{\footnotesize\ttfamily template$<$typename T\+Field$>$ \\
+unsigned int \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::rows (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the number of rows. 
+
+\begin{DoxyReturn}{Returns}
+Number of rows. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classMatrix_ad76d9febbbb81d828c9a534858b04283}\label{classMatrix_ad76d9febbbb81d828c9a534858b04283}} 
+\index{Matrix@{Matrix}!set@{set}}
+\index{set@{set}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{set()}{set()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::set (\begin{DoxyParamCaption}\item[{const unsigned \&}]{i,  }\item[{const unsigned \&}]{j,  }\item[{const T\+Field \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Set function\+: set value of row i, column j. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Element row. \\
+\hline
+{\em j} & Element column. \\
+\hline
+{\em value} & New value. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classMatrix_ac895b4ba9b119d16219b075675f581b4}\label{classMatrix_ac895b4ba9b119d16219b075675f581b4}} 
+\index{Matrix@{Matrix}!set\+\_\+multiplier@{set\+\_\+multiplier}}
+\index{set\+\_\+multiplier@{set\+\_\+multiplier}!Matrix@{Matrix}}
+\subsubsection{\texorpdfstring{set\+\_\+multiplier()}{set\_multiplier()}}
+{\footnotesize\ttfamily template$<$typename T\+Field $>$ \\
+void \mbox{\hyperlink{classMatrix}{Matrix}}$<$ T\+Field $>$\+::set\+\_\+multiplier (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classMatrixMultiplier}{Matrix\+Multiplier}}$<$ T\+Field $>$$>$}]{mult }\end{DoxyParamCaption})}
+
+
+
+Set the strategy for multiplication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mult} & The new multiplier. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/Matrix.\+h\item 
+src/Matrix.\+inl\end{DoxyCompactItemize}

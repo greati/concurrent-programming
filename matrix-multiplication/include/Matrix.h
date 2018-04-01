@@ -46,7 +46,8 @@ class Matrix {
         /**
          * Constructor for an m x n matrix, with an initial value for all elements.
          *
-         * @param m        Number of lines and columns.
+         * @param m        Number of lines.
+         * @param n        Number of columns.
          * @param initial  Fill the matrix with this value.
          * */
         Matrix(const unsigned & m, const unsigned & n, const TField & initial);

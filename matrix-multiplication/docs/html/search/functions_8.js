@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['_7ematrix',['~Matrix',['../classMath_1_1Matrix.html#aacd788cf0658928929d9c381f95cd060',1,'Math::Matrix']]],
-  ['_7ematrixmultiplier',['~MatrixMultiplier',['../classMath_1_1MatrixMultiplier.html#af43501cad28dfd11f8dd73dc25edd51b',1,'Math::MatrixMultiplier']]]
+  ['_7ematrix',['~Matrix',['../classMatrix.html#a3474dab2c6b05e89bdfaf3270e5081ec',1,'Matrix']]],
+  ['_7ematrixmultiplier',['~MatrixMultiplier',['../classMatrixMultiplier.html#a2c2ef9361dfb7fed622abbb282ba2269',1,'MatrixMultiplier']]]
 ];

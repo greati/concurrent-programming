@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['concurrentmatrixmultiplier',['ConcurrentMatrixMultiplier',['../classMath_1_1ConcurrentMatrixMultiplier.html',1,'Math']]]
+  ['concurrentmatrixmultiplier',['ConcurrentMatrixMultiplier',['../classConcurrentMatrixMultiplier.html',1,'']]]
 ];

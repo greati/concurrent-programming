@@ -21,17 +21,19 @@ enum \mbox{\hyperlink{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6b}{E
 \begin{DoxyCompactItemize}
 \item 
 std\+::ostream \& \mbox{\hyperlink{namespaceMatTestUtils_a8d3fb72c1d83eeaef63f6255186d26c6}{operator$<$$<$}} (std\+::ostream \&os, const \mbox{\hyperlink{structMatTestUtils_1_1PerfStats}{Perf\+Stats}} \&ps)
-\begin{DoxyCompactList}\small\item\em Writes the performance statistics using a stream. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Writes the performance statistics to a stream. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{namespaceMatTestUtils_affa961d32d7a7eb7addab0a07767f14f}{read\+\_\+arguments}} (int argc, char const $\ast$argv\mbox{[}$\,$\mbox{]}, int \&n, \mbox{\hyperlink{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6b}{Exec\+Type}} \&method, bool \&write)
 \begin{DoxyCompactList}\small\item\em Read command line arguments as specified in the project requirements. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{namespaceMatTestUtils_a9e032c504f598952db985df790a0bcaa}{get\+\_\+filename}} (std\+::string matrix\+\_\+name, int n)
 \begin{DoxyCompactList}\small\item\em Compose the file name of the test matrices as specified in the project description. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \mbox{\hyperlink{namespaceMatTestUtils_afe3ee64f63e541853b625e7ee33f32a8}{read\+\_\+matrix}} (std\+::string filename)
+\mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \mbox{\hyperlink{namespaceMatTestUtils_ac9fd0d2adf3b7cf8557c67e8874ba878}{read\+\_\+matrix}} (std\+::string filename)
 \begin{DoxyCompactList}\small\item\em Read matrix from the a test file, as specified in the project description. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{structMatTestUtils_1_1PerfStats}{Perf\+Stats}} \mbox{\hyperlink{namespaceMatTestUtils_acb8180416ec63f236bd49092434ce55e}{mult\+\_\+perf\+\_\+stats}} (const \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \&A, const \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \&B, \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \&C, const int \&nrepeat)
+\mbox{\hyperlink{structMatTestUtils_1_1PerfStats}{Perf\+Stats}} \mbox{\hyperlink{namespaceMatTestUtils_a2d2c2d9b072496ad809920b09ecf4b45}{mult\+\_\+perf\+\_\+stats}} (const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \&A, const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \&B, \mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \&C, const int \&nrepeat)
 \begin{DoxyCompactList}\small\item\em Multiplies AxB repeated times, returning statistical results about the sequence of the running times. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}
+\item 
+const int \mbox{\hyperlink{namespaceMatTestUtils_a8d91bda429e88080233eaa273c885863}{col\+\_\+width}} = 15
 \item 
 const int \mbox{\hyperlink{namespaceMatTestUtils_ac809b72319e3d38f960650baf31dc1e6}{min\+\_\+n}} = 4
 \item 
@@ -42,7 +44,7 @@ const int \mbox{\hyperlink{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d
 \subsection{Detailed Description}
 Methods, structures and auxiliar definitions for testing different matrix multiplication approachs. 
 
-This was specifically designed according to the requirements of the proposed work. It has methods for reading matrices from file in a fixed format and testing them, generating statistics about the multiplication performance.
+This was specifically designed according to the requirements of the proposed project. It has methods for reading matrices from file in a fixed format, testing them, and generating statistics about the multiplication performance.
 
 \begin{DoxyAuthor}{Author}
 Vitor Greati, Carlos Vieira 
@@ -63,7 +65,7 @@ Vitor Greati, Carlos Vieira
 
 Types of multipliers. 
 
-Used when it is necessary to check what multiplication approach was requested. \begin{DoxyEnumFields}{Enumerator}
+Used to check what multiplication approach was requested. \begin{DoxyEnumFields}{Enumerator}
 \raisebox{\heightof{T}}[0pt][0pt]{\index{S\+E\+Q\+U\+E\+N\+T\+I\+AL@{S\+E\+Q\+U\+E\+N\+T\+I\+AL}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}\index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!S\+E\+Q\+U\+E\+N\+T\+I\+AL@{S\+E\+Q\+U\+E\+N\+T\+I\+AL}}}\mbox{\Hypertarget{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4}\label{namespaceMatTestUtils_a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4}} 
 S\+E\+Q\+U\+E\+N\+T\+I\+AL&Sequential approach. \\
 \hline
@@ -88,16 +90,16 @@ Compose the file name of the test matrices as specified in the project descripti
 
 
 \begin{DoxyParams}{Parameters}
-{\em matrix\+\_\+name} & Matrix name (A $\vert$ B) \\
+{\em matrix\+\_\+name} & \mbox{\hyperlink{classMatrix}{Matrix}} name (A $\vert$ B) \\
 \hline
-{\em n} & Matrix size. \\
+{\em n} & \mbox{\hyperlink{classMatrix}{Matrix}} size. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{namespaceMatTestUtils_acb8180416ec63f236bd49092434ce55e}\label{namespaceMatTestUtils_acb8180416ec63f236bd49092434ce55e}} 
+\mbox{\Hypertarget{namespaceMatTestUtils_a2d2c2d9b072496ad809920b09ecf4b45}\label{namespaceMatTestUtils_a2d2c2d9b072496ad809920b09ecf4b45}} 
 \index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!mult\+\_\+perf\+\_\+stats@{mult\+\_\+perf\+\_\+stats}}
 \index{mult\+\_\+perf\+\_\+stats@{mult\+\_\+perf\+\_\+stats}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}
 \subsubsection{\texorpdfstring{mult\+\_\+perf\+\_\+stats()}{mult\_perf\_stats()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{structMatTestUtils_1_1PerfStats}{Perf\+Stats}} Mat\+Test\+Utils\+::mult\+\_\+perf\+\_\+stats (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ \&}]{C,  }\item[{const int \&}]{nrepeat }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{structMatTestUtils_1_1PerfStats}{Perf\+Stats}} Mat\+Test\+Utils\+::mult\+\_\+perf\+\_\+stats (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \&}]{A,  }\item[{const \mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \&}]{B,  }\item[{\mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ \&}]{C,  }\item[{const int \&}]{nrepeat }\end{DoxyParamCaption})}
 
 
 
@@ -122,7 +124,7 @@ Multiplies AxB repeated times, returning statistical results about the sequence 
 
 
 
-Writes the performance statistics using a stream. 
+Writes the performance statistics to a stream. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -147,18 +149,18 @@ Read command line arguments as specified in the project requirements.
 \hline
 {\em argv} & Arguments. \\
 \hline
-{\em n} & Matrix size. \\
+{\em n} & \mbox{\hyperlink{classMatrix}{Matrix}} size. \\
 \hline
-{\em method} & Required method. \\
+{\em method} & Required processing method. \\
 \hline
-{\em write} & True if the result matrix must be written in a file. \\
+{\em write} & True if the result matrix must be written in a file (defaults to true). \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{namespaceMatTestUtils_afe3ee64f63e541853b625e7ee33f32a8}\label{namespaceMatTestUtils_afe3ee64f63e541853b625e7ee33f32a8}} 
+\mbox{\Hypertarget{namespaceMatTestUtils_ac9fd0d2adf3b7cf8557c67e8874ba878}\label{namespaceMatTestUtils_ac9fd0d2adf3b7cf8557c67e8874ba878}} 
 \index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!read\+\_\+matrix@{read\+\_\+matrix}}
 \index{read\+\_\+matrix@{read\+\_\+matrix}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}
 \subsubsection{\texorpdfstring{read\+\_\+matrix()}{read\_matrix()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classMath_1_1Matrix}{Math\+::\+Matrix}}$<$ int $>$ Mat\+Test\+Utils\+::read\+\_\+matrix (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{classMatrix}{Matrix}}$<$ int $>$ Mat\+Test\+Utils\+::read\+\_\+matrix (\begin{DoxyParamCaption}\item[{std\+::string}]{filename }\end{DoxyParamCaption})}
 
 
 
@@ -172,7 +174,13 @@ Read matrix from the a test file, as specified in the project description.
 
 
 \subsection{Variable Documentation}
-\mbox{\Hypertarget{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}\label{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}} 
+\mbox{\Hypertarget{namespaceMatTestUtils_a8d91bda429e88080233eaa273c885863}\label{namespaceMatTestUtils_a8d91bda429e88080233eaa273c885863}} 
+\index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!col\+\_\+width@{col\+\_\+width}}
+\index{col\+\_\+width@{col\+\_\+width}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}
+\subsubsection{\texorpdfstring{col\+\_\+width}{col\_width}}
+{\footnotesize\ttfamily const int Mat\+Test\+Utils\+::col\+\_\+width = 15}
+
+Width of the columns when printing. \mbox{\Hypertarget{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}\label{namespaceMatTestUtils_aae57ce6440d799106e6f95f6094b2d6d}} 
 \index{Mat\+Test\+Utils@{Mat\+Test\+Utils}!max\+\_\+n@{max\+\_\+n}}
 \index{max\+\_\+n@{max\+\_\+n}!Mat\+Test\+Utils@{Mat\+Test\+Utils}}
 \subsubsection{\texorpdfstring{max\+\_\+n}{max\_n}}

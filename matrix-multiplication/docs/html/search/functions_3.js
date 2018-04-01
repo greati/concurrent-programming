@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['matrix',['Matrix',['../classMath_1_1Matrix.html#a15145cfc26ef1fd2f68e4a4489490e30',1,'Math::Matrix::Matrix(const int &amp;_m, const int &amp;_n, const TField &amp;_diag, const TField &amp;_others)'],['../classMath_1_1Matrix.html#ae0d9fbd3225b9b3d50f7b42de14cead6',1,'Math::Matrix::Matrix(const int &amp;_m, const int &amp;_n, const TField &amp;_initial)'],['../classMath_1_1Matrix.html#a3e7c39f3d5951f365f687341cfb0feef',1,'Math::Matrix::Matrix(const std::initializer_list&lt; std::initializer_list&lt; TField &gt;&gt; &amp;l)'],['../classMath_1_1Matrix.html#a2b849f680fc4ba0d5b0277f1b3116b81',1,'Math::Matrix::Matrix(const int &amp;n, const TField *array)'],['../classMath_1_1Matrix.html#adc2c049cc6c6341c4088c6ec6e6fd084',1,'Math::Matrix::Matrix(const Matrix&lt; TField &gt; &amp;from)']]],
-  ['mult_5fperf_5fstats',['mult_perf_stats',['../namespaceMatTestUtils.html#acb8180416ec63f236bd49092434ce55e',1,'MatTestUtils']]],
-  ['multiply',['multiply',['../classMath_1_1ConcurrentMatrixMultiplier.html#aff05c55c52bf7b9fb58b5a52d5247e7d',1,'Math::ConcurrentMatrixMultiplier::multiply()'],['../classMath_1_1SequentialMatrixMultiplier.html#ac50584976bf8efe3a0a755048c427753',1,'Math::SequentialMatrixMultiplier::multiply()']]]
+  ['matrix',['Matrix',['../classMatrix.html#aaf53d2ed43916bdff67dde343acc2d9a',1,'Matrix::Matrix(const unsigned &amp;m, const unsigned &amp;n, const TField &amp;initial)'],['../classMatrix.html#ac6bf5bf423a6d56ce31e8659de788c54',1,'Matrix::Matrix(const Matrix&lt; TField &gt; &amp;from)']]],
+  ['mult_5fperf_5fstats',['mult_perf_stats',['../namespaceMatTestUtils.html#a2d2c2d9b072496ad809920b09ecf4b45',1,'MatTestUtils']]],
+  ['multiplier',['multiplier',['../classMatrix.html#a8b97189db83694ee636a3a5102eef151',1,'Matrix']]],
+  ['multiply',['multiply',['../classConcurrentMatrixMultiplier.html#af4c7cedd919db3c918e48521df54b52e',1,'ConcurrentMatrixMultiplier::multiply()'],['../classSequentialMatrixMultiplier.html#aeb79c1b8b364bfb810f20b6e2b192a1b',1,'SequentialMatrixMultiplier::multiply()']]]
 ];

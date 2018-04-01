@@ -23,7 +23,7 @@
  * */
 namespace MatTestUtils {
 
-    extern const int col_width;
+    extern const int col_width;         /*!< Width of the columns when printing.*/
     extern const int min_n;             /*!< Dimension of the smaller matrix in the test set.*/
     extern const int max_n;             /*!< Dimension of the largest matrix in the test set.*/
 	

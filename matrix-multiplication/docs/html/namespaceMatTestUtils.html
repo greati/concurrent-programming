@@ -91,7 +91,7 @@ Enumerations</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a8d3fb72c1d83eeaef63f6255186d26c6"><td class="memItemLeft" align="right" valign="top">std::ostream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#a8d3fb72c1d83eeaef63f6255186d26c6">operator&lt;&lt;</a> (std::ostream &amp;os, const <a class="el" href="structMatTestUtils_1_1PerfStats.html">PerfStats</a> &amp;ps)</td></tr>
-<tr class="memdesc:a8d3fb72c1d83eeaef63f6255186d26c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the performance statistics using a stream.  <a href="#a8d3fb72c1d83eeaef63f6255186d26c6">More...</a><br /></td></tr>
+<tr class="memdesc:a8d3fb72c1d83eeaef63f6255186d26c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the performance statistics to a stream.  <a href="#a8d3fb72c1d83eeaef63f6255186d26c6">More...</a><br /></td></tr>
 <tr class="separator:a8d3fb72c1d83eeaef63f6255186d26c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:affa961d32d7a7eb7addab0a07767f14f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#affa961d32d7a7eb7addab0a07767f14f">read_arguments</a> (int argc, char const *argv[], int &amp;n, <a class="el" href="namespaceMatTestUtils.html#a8ce892071d861e65dd62ef377efaaa6b">ExecType</a> &amp;method, bool &amp;write)</td></tr>
 <tr class="memdesc:affa961d32d7a7eb7addab0a07767f14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read command line arguments as specified in the project requirements.  <a href="#affa961d32d7a7eb7addab0a07767f14f">More...</a><br /></td></tr>
@@ -99,15 +99,17 @@ Functions</h2></td></tr>
 <tr class="memitem:a9e032c504f598952db985df790a0bcaa"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#a9e032c504f598952db985df790a0bcaa">get_filename</a> (std::string matrix_name, int n)</td></tr>
 <tr class="memdesc:a9e032c504f598952db985df790a0bcaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compose the file name of the test matrices as specified in the project description.  <a href="#a9e032c504f598952db985df790a0bcaa">More...</a><br /></td></tr>
 <tr class="separator:a9e032c504f598952db985df790a0bcaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe3ee64f63e541853b625e7ee33f32a8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#afe3ee64f63e541853b625e7ee33f32a8">read_matrix</a> (std::string filename)</td></tr>
-<tr class="memdesc:afe3ee64f63e541853b625e7ee33f32a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read matrix from the a test file, as specified in the project description.  <a href="#afe3ee64f63e541853b625e7ee33f32a8">More...</a><br /></td></tr>
-<tr class="separator:afe3ee64f63e541853b625e7ee33f32a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb8180416ec63f236bd49092434ce55e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatTestUtils_1_1PerfStats.html">PerfStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#acb8180416ec63f236bd49092434ce55e">mult_perf_stats</a> (const <a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; &amp;A, const <a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; &amp;B, <a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; &amp;C, const int &amp;nrepeat)</td></tr>
-<tr class="memdesc:acb8180416ec63f236bd49092434ce55e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies AxB repeated times, returning statistical results about the sequence of the running times.  <a href="#acb8180416ec63f236bd49092434ce55e">More...</a><br /></td></tr>
-<tr class="separator:acb8180416ec63f236bd49092434ce55e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9fd0d2adf3b7cf8557c67e8874ba878"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#ac9fd0d2adf3b7cf8557c67e8874ba878">read_matrix</a> (std::string filename)</td></tr>
+<tr class="memdesc:ac9fd0d2adf3b7cf8557c67e8874ba878"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read matrix from the a test file, as specified in the project description.  <a href="#ac9fd0d2adf3b7cf8557c67e8874ba878">More...</a><br /></td></tr>
+<tr class="separator:ac9fd0d2adf3b7cf8557c67e8874ba878"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d2c2d9b072496ad809920b09ecf4b45"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structMatTestUtils_1_1PerfStats.html">PerfStats</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#a2d2c2d9b072496ad809920b09ecf4b45">mult_perf_stats</a> (const <a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; &amp;A, const <a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; &amp;B, <a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; &amp;C, const int &amp;nrepeat)</td></tr>
+<tr class="memdesc:a2d2c2d9b072496ad809920b09ecf4b45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Multiplies AxB repeated times, returning statistical results about the sequence of the running times.  <a href="#a2d2c2d9b072496ad809920b09ecf4b45">More...</a><br /></td></tr>
+<tr class="separator:a2d2c2d9b072496ad809920b09ecf4b45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:a8d91bda429e88080233eaa273c885863"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#a8d91bda429e88080233eaa273c885863">col_width</a> = 15</td></tr>
+<tr class="separator:a8d91bda429e88080233eaa273c885863"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac809b72319e3d38f960650baf31dc1e6"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#ac809b72319e3d38f960650baf31dc1e6">min_n</a> = 4</td></tr>
 <tr class="separator:ac809b72319e3d38f960650baf31dc1e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aae57ce6440d799106e6f95f6094b2d6d"><td class="memItemLeft" align="right" valign="top">const int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceMatTestUtils.html#aae57ce6440d799106e6f95f6094b2d6d">max_n</a> = 2048</td></tr>
@@ -115,7 +117,7 @@ Variables</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Methods, structures and auxiliar definitions for testing different matrix multiplication approachs. </p>
-<p>This was specifically designed according to the requirements of the proposed work. It has methods for reading matrices from file in a fixed format and testing them, generating statistics about the multiplication performance.</p>
+<p>This was specifically designed according to the requirements of the proposed project. It has methods for reading matrices from file in a fixed format, testing them, and generating statistics about the multiplication performance.</p>
 <dl class="section author"><dt>Author</dt><dd>Vitor Greati, Carlos Vieira </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2018-03-25 </dd></dl>
 </div><h2 class="groupheader">Enumeration Type Documentation</h2>
@@ -132,7 +134,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Types of multipliers. </p>
-<p>Used when it is necessary to check what multiplication approach was requested. </p>
+<p>Used to check what multiplication approach was requested. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a8ce892071d861e65dd62ef377efaaa6ba3b3a618fe07801523cfe25e59e502fa4"></a>SEQUENTIAL&#160;</td><td class="fielddoc"><p>Sequential approach. </p>
 </td></tr>
@@ -172,16 +174,16 @@ Variables</h2></td></tr>
 <p>Compose the file name of the test matrices as specified in the project description. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">matrix_name</td><td>Matrix name (A | B) </td></tr>
-    <tr><td class="paramname">n</td><td>Matrix size. </td></tr>
+    <tr><td class="paramname">matrix_name</td><td><a class="el" href="classMatrix.html" title="Represents an m x n matrix, with its data and some operations. ">Matrix</a> name (A | B) </td></tr>
+    <tr><td class="paramname">n</td><td><a class="el" href="classMatrix.html" title="Represents an m x n matrix, with its data and some operations. ">Matrix</a> size. </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="acb8180416ec63f236bd49092434ce55e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb8180416ec63f236bd49092434ce55e">&#9670;&nbsp;</a></span>mult_perf_stats()</h2>
+<a id="a2d2c2d9b072496ad809920b09ecf4b45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d2c2d9b072496ad809920b09ecf4b45">&#9670;&nbsp;</a></span>mult_perf_stats()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -189,19 +191,19 @@ Variables</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="structMatTestUtils_1_1PerfStats.html">PerfStats</a> MatTestUtils::mult_perf_stats </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; &amp;&#160;</td>
           <td class="paramname"><em>A</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; &amp;&#160;</td>
           <td class="paramname"><em>B</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; &amp;&#160;</td>
           <td class="paramname"><em>C</em>, </td>
         </tr>
         <tr>
@@ -257,7 +259,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Writes the performance statistics using a stream. </p>
+<p>Writes the performance statistics to a stream. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">os</td><td>Ouput stream. </td></tr>
@@ -317,23 +319,23 @@ Variables</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">argc</td><td>Number of arguments. </td></tr>
     <tr><td class="paramname">argv</td><td>Arguments. </td></tr>
-    <tr><td class="paramname">n</td><td>Matrix size. </td></tr>
-    <tr><td class="paramname">method</td><td>Required method. </td></tr>
-    <tr><td class="paramname">write</td><td>True if the result matrix must be written in a file. </td></tr>
+    <tr><td class="paramname">n</td><td><a class="el" href="classMatrix.html" title="Represents an m x n matrix, with its data and some operations. ">Matrix</a> size. </td></tr>
+    <tr><td class="paramname">method</td><td>Required processing method. </td></tr>
+    <tr><td class="paramname">write</td><td>True if the result matrix must be written in a file (defaults to true). </td></tr>
   </table>
   </dd>
 </dl>
 
 </div>
 </div>
-<a id="afe3ee64f63e541853b625e7ee33f32a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe3ee64f63e541853b625e7ee33f32a8">&#9670;&nbsp;</a></span>read_matrix()</h2>
+<a id="ac9fd0d2adf3b7cf8557c67e8874ba878"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9fd0d2adf3b7cf8557c67e8874ba878">&#9670;&nbsp;</a></span>read_matrix()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classMath_1_1Matrix.html">Math::Matrix</a>&lt; int &gt; MatTestUtils::read_matrix </td>
+          <td class="memname"><a class="el" href="classMatrix.html">Matrix</a>&lt; int &gt; MatTestUtils::read_matrix </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>filename</em></td><td>)</td>
@@ -353,6 +355,21 @@ Variables</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a8d91bda429e88080233eaa273c885863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d91bda429e88080233eaa273c885863">&#9670;&nbsp;</a></span>col_width</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const int MatTestUtils::col_width = 15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Width of the columns when printing. </p>
+
+</div>
+</div>
 <a id="aae57ce6440d799106e6f95f6094b2d6d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aae57ce6440d799106e6f95f6094b2d6d">&#9670;&nbsp;</a></span>max_n</h2>
 
