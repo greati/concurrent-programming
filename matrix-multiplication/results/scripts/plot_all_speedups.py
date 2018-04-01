@@ -9,7 +9,7 @@ file_color = {'notebook':'#c2a5cf', 'sc_4cores':'#c2e699',
 	'sc_8cores':'#78c679', 'sc_16cores':'#31a354', 'sc_32cores':'#006837'}
 
 for file, label in file_label.items():
-	df = pd.read_csv(file+".txt", sep='\s+')
+	df = pd.read_csv("../"+file+".txt", sep='\s+')
 
 	sequential = df[df.method=='S']
 	concurrent = df[df.method=='C']
@@ -19,10 +19,10 @@ for file, label in file_label.items():
 	plt.plot(x, y, color=file_color[file], label=label)
 
 plt.title('$Speedup$ por configuração', fontsize=13)
-plt.xlabel('Dimensão de matrizes ($2^i$x$2^i$ elementos)', fontsize=12)
-plt.ylabel('$Speedup$ ($\\bar{x}_i^s$ / $\\bar{x}_i^c$)', fontsize=12)
+plt.xlabel('Dimensão de matrizes ($2^x$x$2^x$ elementos)', fontsize=12)
+plt.ylabel('$Speedup$ ($\\alpha_x$)', fontsize=12)
 plt.legend()
 
 plt.xlim(1, x.max()+1)
 plt.xticks(x)
-plt.savefig("graphs/comparative_speedup.png")
+plt.savefig("../graphs/comparative_speedup.png", dpi=500)
