@@ -15,10 +15,17 @@ import java.util.logging.Logger;
 public class BathroomUser extends Thread {
     
     /**
-     * Person.
-     * 
+     * Possible genders of a person, well named.
      */
-    final private Person user;
+    public enum Gender {
+        LADY,
+        GENTLEMAN 
+    }
+    
+    /**
+     * The gender of the person.
+     */
+    private final Gender gender;
     
     /**
      * Bathroom.
@@ -33,16 +40,24 @@ public class BathroomUser extends Thread {
     final private int timeToSpend;
     
     /**
+     * Order of approach.
+     * 
+     */
+    final private int order;
+    
+    /**
      * Constructor.
      * 
-     * @param user
+     * @param gender
      * @param bathroom
+     * @param order
      * @param timeToSpend
      */
-    public BathroomUser(Person user, UnisexBathroom bathroom, int timeToSpend) {
-        this.user = user;
+    public BathroomUser(Gender gender, UnisexBathroom bathroom, int timeToSpend, int order) {
+        this.gender = gender;
         this.bathroom = bathroom;
         this.timeToSpend = timeToSpend;
+        this.order = order;
     }
     
     /**
@@ -52,18 +67,59 @@ public class BathroomUser extends Thread {
     @Override
     public void run() {
         try {
-            
-            System.out.println("==?> " + this.user + " (" + this.timeToSpend + ")" + "\n");
-            
-            this.bathroom.insert(this.user);
+                        
+            this.bathroom.insert(this);
             
             Thread.sleep(timeToSpend);
             
-            this.bathroom.remove(this.user);
+            this.bathroom.remove(this);
             
         } catch (InterruptedException ex) {
             Logger.getLogger(BathroomUser.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public UnisexBathroom getBathroom() {
+        return bathroom;
+    }
+
+    public int getTimeToSpend() {
+        return timeToSpend;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + this.order;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final BathroomUser other = (BathroomUser) obj;
+        return this.order == other.order;
+    }
+
+    @Override
+    public String toString() {
+        return this.gender + " " + this.order;
+    }   
     
 }

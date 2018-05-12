@@ -16,29 +16,29 @@ import java.util.logging.Logger;
 public class UnisexBathroomDriver {
 
     /**
+     * 
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
 
-        //UnisexBathroom bathroom = new UnisexBathroom(Integer.valueOf(args[0]));
-        UnisexBathroom bathroom = new UnisexBathroom(5);
+        UnisexBathroom bathroom = new UnisexBathroom(Integer.valueOf(args[0]));
 
-        
         Random randomGenerator = new Random();
         
-        int idGenerator = 0;
+        int orderGenerator = 1;
         
         // Generate bathroom users
         while (true) {
             try {
                 // Choose gender randomly
                 int genderRandInt = randomGenerator.nextInt(2);
-                Person.Gender gender =  (genderRandInt == 0) ? Person.Gender.GENTLEMAN : Person.Gender.LADY;
+                BathroomUser.Gender gender =  (genderRandInt == 0) ? BathroomUser.Gender.GENTLEMAN : BathroomUser.Gender.LADY;
                 
                 // Choose time randomly
                 int timeRandInt = 2000 + randomGenerator.nextInt(2000);
                 
-                BathroomUser user = new BathroomUser(new Person(idGenerator++, gender), bathroom, timeRandInt);
+                BathroomUser user = new BathroomUser(gender, bathroom, timeRandInt, orderGenerator++);
                 
                 user.setDaemon(true);
                 user.start();

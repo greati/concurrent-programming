@@ -31,15 +31,15 @@ public class UnisexBathroom {
     final int maxCapacity;
     
     /**
-     * 
+     * Current person in the head of the bathroom queue.
      * 
      */
-    int headQueue = 0;
+    volatile int headQueue = 1;
     
     /**
      * The bathroom.
      */
-    final private List<Person> bathroom;
+    final private List<BathroomUser> bathroom;
     
     /**
      * Lock for providing condition variables.
@@ -71,6 +71,10 @@ public class UnisexBathroom {
      */
     final Condition gentlemenIn = lock.newCondition();
     
+    /**
+     * Condition variable to enforce ordering.
+     * 
+     */
     final Condition queue = lock.newCondition();
     
     /**
@@ -88,44 +92,45 @@ public class UnisexBathroom {
      * 
      * @param p
      */
-    public void insert(Person p) {
+    public void insert(BathroomUser p) {
         lock.lock();
         try {
-            
-            if (p.getId() != this.headQueue)
-                this.queue.await();
                         
-            if (this.bathroom.size() == this.maxCapacity) {
-                System.out.println("Awaiting full: " + p);
-                full.await();
+            Dialogue.narrate(p + " arrived. " + "In the bathroom, " + Dialogue.quantityGender(this.bathroom) + ". " + 
+                    "In the queue, "+ Dialogue.quantityInTheQueue(p.getOrder(), headQueue) +
+                    Dialogue.pluralPerson(p.getOrder() - headQueue) + ".");
+            
+            if (p.getOrder() != this.headQueue) {
+                Dialogue.talk(p, "Oh, no, a queue! I need to wait!");
+                this.queue.await();
             }
 
             if (!this.bathroom.isEmpty()) {
-                Person.Gender currentGender = this.bathroom.get(0).getGender();
                 
-                if (currentGender == Person.Gender.LADY && p.getGender() == Person.Gender.GENTLEMAN) {
-                    System.out.println("Awaiting gender: " + p);
+                BathroomUser.Gender currentGender = this.bathroom.get(0).getGender();
+                
+                if (currentGender == BathroomUser.Gender.LADY && p.getGender() == BathroomUser.Gender.GENTLEMAN) {
+                    Dialogue.talk(p, Dialogue.quantityGender(this.bathroom) + " in the bathroom! I need to wait.");
                     this.gentlemenIn.await();
                 }
-                else if (currentGender == Person.Gender.GENTLEMAN && p.getGender() == Person.Gender.LADY) {
-                    System.out.println("Awaiting gender: " + p);
+                else if (currentGender == BathroomUser.Gender.GENTLEMAN && p.getGender() == BathroomUser.Gender.LADY) {
+                    Dialogue.talk(p, Dialogue.quantityGender(this.bathroom) + " in the bathroom! I need to wait.");
                     this.ladiesIn.await();
+                }
+                
+                if (this.bathroom.size() == this.maxCapacity) {
+                    Dialogue.talk(p, "The bathroom is full! Will I hold my fisiologic needs?!");
+                    full.await();
                 }
             }
             
             synchronized(this) {
+                Dialogue.talk(p, "I can enter! Thank you, Universe!");
                 this.bathroom.add(p);
                 this.headQueue++;
                 queue.signal();
             }
                         
-            System.out.println("==> " + p + "\n(!) Current: " + this.bathroom.size() + "/" + this.maxCapacity + "\n");
-            
-            if (this.bathroom.size() == 1) {         
-                // Since will
-                empty.signal();
-            }
-
         } catch(InterruptedException e) {
         
         }finally {            
@@ -138,19 +143,21 @@ public class UnisexBathroom {
      * 
      * @param p
      */
-    public void remove(Person p) {
+    public void remove(BathroomUser p) {
         lock.lock();
         try {
-            if (this.bathroom.isEmpty()) {
-                empty.await();
-            }
             
             synchronized(this){
                 this.bathroom.remove(p);
+                Dialogue.narrate(p + " exits the bathroom.");
+                Dialogue.talk(p, "What a good feeling! And it took only " + p.getTimeToSpend() + " ms! "
+                        + "In the bathroom, " + 
+                        (this.bathroom.isEmpty() ? "nobody." : this.bathroom.size() == 1 ? "1 " + 
+                                p.getGender().toString().toLowerCase() + "." : 
+                                this.bathroom.size() + " " + p.getGender().toString().toLowerCase() + 
+                                        (p.getGender() == BathroomUser.Gender.GENTLEMAN ? "s." : "ies.")));
             }
-            
-            System.out.println("<== " + p + "\n(!) Current: " + this.bathroom.size() + "\n");
-            
+                        
             if (this.bathroom.size() == this.maxCapacity - 1) 
                 full.signal();
             
@@ -158,17 +165,13 @@ public class UnisexBathroom {
                 // Gender
                 switch (p.getGender()) {
                     case GENTLEMAN:
-                        System.out.println("Signal ladies");
                         this.ladiesIn.signal();
                         break;
                     case LADY:
-                        System.out.println("Signal gentleman");
                         this.gentlemenIn.signal();
                         break;
                 }
-            }
-            
-        } catch(InterruptedException e) {
+            }            
         
         } finally {            
             lock.unlock();
