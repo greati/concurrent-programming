@@ -14,11 +14,11 @@ import java.util.List;
 public class Dialogue {
     
     public static void talk (BathroomUser person, String talk) {
-        System.out.println(person + " says: " + talk);
+        System.out.println(person + " says: " + talk+"\n");
     }
     
     public static void narrate (String text) {
-        System.out.println("(" + text + ")");
+        System.out.println("(" + text + ")" + "\n");
     }
     
     public static String quantityGender (List<BathroomUser> bathroom) {
