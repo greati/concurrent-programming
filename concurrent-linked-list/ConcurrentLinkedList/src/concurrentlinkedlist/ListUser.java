@@ -5,7 +5,6 @@
  */
 package concurrentlinkedlist;
 
-import java.util.NoSuchElementException;
 
 /**
  *
@@ -20,12 +19,12 @@ public class ListUser extends Thread {
     }
     
     private final Operation operation;
-    private final Node node;
+    private final int value;
     private final ConcurrentLinkedList list;
     
-    public ListUser(ConcurrentLinkedList list, Operation operation, Node n) {
+    public ListUser(ConcurrentLinkedList list, Operation operation, int value) {
         this.list = list;
-        this.node = n;
+        this.value = value;
         this.operation = operation;
     }
     
@@ -35,29 +34,17 @@ public class ListUser extends Thread {
      */
     @Override
     public void run() {
-        int value = this.node.getData();
-        String v = "value " + Integer.toString(value);
-        
-        try {
-            switch (this.operation) {
-                case SEARCH:
-                    System.out.println("searching for "+v);
-                    int pos = this.list.findPosition(value);
-                    System.out.println(v+" found at position "+
-                            Integer.toString(pos));
-                case INSERTION:
-                    System.out.println("inserting "+v);
-                    this.list.insert(value);
-                    System.out.println(v+" inserted");
-                case REMOVAL:
-                    System.out.println("removing "+v);
-                    this.list.removeValue(value);
-                    System.out.println(v+" removed");
-            }
-        } catch (NoSuchElementException ex) {
-            System.out.println(v+" not found");
-        } finally {
-            System.out.println(this.list);
+        switch (this.operation) {
+            case SEARCH:
+                this.list.findPosition(value);
+                break;
+            case INSERTION:
+                this.list.insert(value);
+                break;
+            case REMOVAL:
+                this.list.removeValue(value);
+                break;
         }
+
     }
 }
