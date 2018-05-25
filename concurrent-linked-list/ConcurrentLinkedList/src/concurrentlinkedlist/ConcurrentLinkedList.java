@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package concurrentlinkedlist;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.NoSuchElementException;
-import java.lang.IllegalArgumentException;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -21,10 +23,29 @@ public class ConcurrentLinkedList {
     private final ReentrantReadWriteLock searchRemoveLock;
     private final ReentrantLock insertRemoveLock;
     
+    private final boolean randomDelays;
+    private Random randomGenerator;
+    private static final int MAX_DELAY = 1000;
+    
     public ConcurrentLinkedList() {
         this.head = null;
         this.tail = null;
         this.length = 0;
+        this.randomDelays = false;
+        
+        boolean fair = true;
+        this.searchRemoveLock = new ReentrantReadWriteLock(fair);
+        this.insertRemoveLock = new ReentrantLock(fair);
+    }
+    
+    public ConcurrentLinkedList(boolean randomDelays) {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+        this.randomDelays = randomDelays;
+        if (randomDelays) {
+            this.randomGenerator = new Random();
+        }
         
         boolean fair = true;
         this.searchRemoveLock = new ReentrantReadWriteLock(fair);
@@ -97,6 +118,9 @@ public class ConcurrentLinkedList {
         this.searchRemoveLock.writeLock().lock();
         this.insertRemoveLock.lock();
         try {
+            if (this.randomDelays) {
+                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
+            }
             if (target == this.head)
                 this.head = target.getNext();
             else
@@ -104,6 +128,9 @@ public class ConcurrentLinkedList {
             if (target == this.tail)
                 this.tail = prev;
             this.length--;
+        } catch (InterruptedException ex){
+            Logger.getLogger(ConcurrentLinkedList.class.getName()).
+                    log(Level.SEVERE, null, ex);
         } finally {
             this.insertRemoveLock.unlock();
             this.searchRemoveLock.writeLock().unlock();
@@ -120,6 +147,9 @@ public class ConcurrentLinkedList {
     public void insert(Node n) {
         this.insertRemoveLock.lock();
         try {
+            if (this.randomDelays) {
+                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
+            }
             if (this.length > 0)
                 this.tail.setNext(n);
             else
@@ -127,6 +157,9 @@ public class ConcurrentLinkedList {
 
             this.tail = n;
             this.length++;
+        } catch(InterruptedException ex) {
+            Logger.getLogger(ConcurrentLinkedList.class.getName()).
+                    log(Level.SEVERE, null, ex);
         } finally {
             this.insertRemoveLock.unlock();  
         }
@@ -193,6 +226,9 @@ public class ConcurrentLinkedList {
     public int getPosition(Node n) {
         this.searchRemoveLock.readLock().lock();
         try {
+            if (this.randomDelays) {
+                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
+            }
             int pos = 0;
             Node i = this.head;
             while(i != null) {
@@ -202,6 +238,10 @@ public class ConcurrentLinkedList {
                 pos++;
             }
             throw new NoSuchElementException();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ConcurrentLinkedList.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            return -1;
         } finally {
             this.searchRemoveLock.readLock().unlock();
         }
