@@ -87,60 +87,34 @@ public class ConcurrentLinkedList {
         }
     }
     
-    // search and remove
-    public void remove(Node n) {
-        Node prev = this.getPrevious(n);
-        this.remove(prev, n);
-    }
-    
-    // search and remove
-    public void removeAt(int pos) {
-        if (pos > 0) {
-            Node prev = this.getNodeAt(pos-1);
-            this.remove(prev, prev.getNext());
-        } else {
-            this.remove(null, this.head);
-        }
-    }
-    
+
     // search and remove
     public void removeValue(int data) {
-        this.searchRemoveLock.readLock().lock();
-        Node n, prev;
-        try {
-            n = this.search(data);
-            prev = this.getPrevious(n);
-        } finally {
-            this.searchRemoveLock.readLock().unlock();
-        }
-        this.remove(prev, n);
-    }
-    
-    // remove
-    private void remove(Node prev, Node target) {
         this.searchRemoveLock.writeLock().lock();
         this.insertRemoveLock.lock();
-        int value = target.getData();
-        System.out.println("Removing value "+value);
+        System.out.println("Removing value "+data);
         try {
             if (this.randomDelays)
                 Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
-            if (target == null)
-                throw new NoSuchElementException();
             
-            if (target == this.head)
-                this.head = target.getNext();
-            else
-                prev.setNext(target.getNext());
-            if (target == this.tail)
-                this.tail = prev;
-            this.length--;
-            System.out.println("Value "+value+" removed");
-        } catch (InterruptedException ex){
+            Node prev = null;
+            Node curr = this.head;
+            while(curr != null) {
+                if (curr.getData() == data) {
+                    remove(prev, curr);
+                    System.out.println("Value "+data+" removed");
+                    return;
+                }
+
+                prev = curr;
+                curr = curr.getNext();
+            }
+            throw new NoSuchElementException();
+        } catch (InterruptedException ex) {
             Logger.getLogger(ConcurrentLinkedList.class.getName()).
                     log(Level.SEVERE, null, ex);
         } catch (NoSuchElementException ex) {
-            System.out.println("Value "+value+" not found");
+            System.out.println("Value "+data+" not found");
         } finally {
             System.out.println(this);
             this.insertRemoveLock.unlock();
@@ -148,6 +122,16 @@ public class ConcurrentLinkedList {
         }
     }
     
+    private void remove(Node prev, Node target) {
+        if (target == this.head)
+            this.head = target.getNext();
+        else
+            prev.setNext(target.getNext());
+        if (target == this.tail)
+            this.tail = prev;
+        this.length--;
+    } 
+
     // insert
     public void insert(int data) {
         this.insert(data, false);

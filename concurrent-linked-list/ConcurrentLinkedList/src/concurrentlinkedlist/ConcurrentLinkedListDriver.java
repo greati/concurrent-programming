@@ -13,9 +13,9 @@ import java.util.Random;
  * @author carlosv
  */
 public class ConcurrentLinkedListDriver {
-    private static final int OPERATIONS = 5;
+    private static final int OPERATIONS = 100;
     public static final Random RANDOM_GEN = new Random();
-    private static final int MAX_VALUE = 5;
+    private static final int MAX_VALUE = 3;
    
     /**
      * @param args the command line arguments
