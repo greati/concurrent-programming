@@ -39,7 +39,7 @@ public class ListUser extends Thread {
                 this.list.findPosition(value);
                 break;
             case INSERTION:
-                this.list.insert(value);
+                this.list.insert(value, false);
                 break;
             case REMOVAL:
                 this.list.removeValue(value);

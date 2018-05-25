@@ -16,12 +16,13 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author carlosv
  */
 public class ConcurrentLinkedList {
-    private Node head;
-    private Node tail;
-    private int length;
+    private volatile Node head;
+    private volatile Node tail;
+    private volatile int length;
     
     private final ReentrantReadWriteLock searchRemoveLock;
     private final ReentrantLock insertRemoveLock;
+    private final ReentrantLock printLock;
     
     private final boolean randomDelays;
     private Random randomGenerator;
@@ -36,6 +37,7 @@ public class ConcurrentLinkedList {
         boolean fair = true;
         this.searchRemoveLock = new ReentrantReadWriteLock(fair);
         this.insertRemoveLock = new ReentrantLock(fair);
+        this.printLock = new ReentrantLock(fair);
     }
     
     public ConcurrentLinkedList(boolean randomDelays) {
@@ -50,6 +52,7 @@ public class ConcurrentLinkedList {
         boolean fair = true;
         this.searchRemoveLock = new ReentrantReadWriteLock(fair);
         this.insertRemoveLock = new ReentrantLock(fair);
+        this.printLock = new ReentrantLock(fair);
     }
 
     public Node getHead() {
@@ -66,7 +69,7 @@ public class ConcurrentLinkedList {
     
     @Override
     public String toString() {
-        this.searchRemoveLock.readLock().lock();
+        this.printLock.lock();
         try {
             String list = "[";
             Node n = this.head;
@@ -80,7 +83,7 @@ public class ConcurrentLinkedList {
 
             return list;
         } finally {
-            this.searchRemoveLock.readLock().unlock();
+            this.printLock.unlock();
         }
     }
     
