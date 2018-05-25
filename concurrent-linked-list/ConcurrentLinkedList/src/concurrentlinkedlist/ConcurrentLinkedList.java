@@ -106,6 +106,9 @@ public class ConcurrentLinkedList {
         Node n, prev;
         try {
             n = this.search(data);
+            if (n == null) {
+                throw new NoSuchElementException();
+            }
             prev = this.getPrevious(n);
         } finally {
             this.searchRemoveLock.readLock().unlock();
@@ -169,15 +172,37 @@ public class ConcurrentLinkedList {
     public Node search(int data) {
         this.searchRemoveLock.readLock().lock();
         try {
-            int pos = 0;
             Node i = this.head;
             while(i != null) {
                 if (i.getData() == data)
                     return i;
                 i = i.getNext();
+            }
+            throw new NoSuchElementException();
+        } finally {
+            this.searchRemoveLock.readLock().unlock();
+        }
+    }
+    
+    public int findPosition(int data) {
+        this.searchRemoveLock.readLock().lock();
+        try {
+            if (this.randomDelays) {
+                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
+            }
+            int pos = 0;
+            Node i = this.head;
+            while(i != null) {
+                if (i.getData() == data)
+                    return pos;
+                i = i.getNext();
                 pos++;
             }
-            return null;
+            throw new NoSuchElementException();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ConcurrentLinkedList.class.getName()).
+                    log(Level.SEVERE, null, ex);
+            return -1;
         } finally {
             this.searchRemoveLock.readLock().unlock();
         }
@@ -187,7 +212,6 @@ public class ConcurrentLinkedList {
     public Node getPrevious(Node n) {
         this.searchRemoveLock.readLock().lock();
         try {
-            int pos = 0;
             Node prev = null;
             Node curr = this.head;
             while(curr != null) {
@@ -226,9 +250,6 @@ public class ConcurrentLinkedList {
     public int getPosition(Node n) {
         this.searchRemoveLock.readLock().lock();
         try {
-            if (this.randomDelays) {
-                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
-            }
             int pos = 0;
             Node i = this.head;
             while(i != null) {
@@ -238,10 +259,6 @@ public class ConcurrentLinkedList {
                 pos++;
             }
             throw new NoSuchElementException();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(ConcurrentLinkedList.class.getName()).
-                    log(Level.SEVERE, null, ex);
-            return -1;
         } finally {
             this.searchRemoveLock.readLock().unlock();
         }
