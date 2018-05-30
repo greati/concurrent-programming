@@ -16,7 +16,10 @@ import java.util.logging.Logger;
 public class UnisexBathroomDriver {
 
     /**
+     * Driver for testing the unisex bathroom implementation.
      * 
+     * It generates a bathroom user of a random gender and with a random
+     * time to spent inside the bathroom (in the interval [2000 ms,4000 ms]).
      * 
      * @param args the command line arguments
      */
@@ -43,7 +46,7 @@ public class UnisexBathroomDriver {
                 user.setDaemon(true);
                 user.start();
                 
-                Thread.sleep(500); 
+                Thread.sleep(1000); 
             } catch (InterruptedException ex) {
                 Logger.getLogger(UnisexBathroomDriver.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -9,7 +9,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Represents a bathroom user.
+ * 
  * @author vitorgreati
  */
 public class BathroomUser extends Thread {

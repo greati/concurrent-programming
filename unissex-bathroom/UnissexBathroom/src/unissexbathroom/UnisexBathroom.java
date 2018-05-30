@@ -37,7 +37,7 @@ public class UnisexBathroom {
     volatile int headQueue = 1;
     
     /**
-     * The bathroom.
+     * The current bathroom state.
      */
     final private List<BathroomUser> bathroom;
     
@@ -46,12 +46,6 @@ public class UnisexBathroom {
      * 
      */
     final Lock lock = new ReentrantLock(true);
-    
-    /**
-     * Condition variable for indicating emptiness.
-     * 
-     */
-    final Condition empty = lock.newCondition();
     
     /**
      * Condition variable for indicating fullness.
@@ -152,10 +146,7 @@ public class UnisexBathroom {
                 Dialogue.narrate(p + " exits the bathroom.");
                 Dialogue.talk(p, "What a good feeling! And it took only " + p.getTimeToSpend() + " ms! "
                         + "In the bathroom, " + 
-                        (this.bathroom.isEmpty() ? "nobody." : this.bathroom.size() == 1 ? "1 " + 
-                                p.getGender().toString().toLowerCase() + "." : 
-                                this.bathroom.size() + " " + p.getGender().toString().toLowerCase() + 
-                                        (p.getGender() == BathroomUser.Gender.GENTLEMAN ? "s." : "ies.")));
+                        (this.bathroom.isEmpty() ? "nobody" : this.bathroom.size() + " " + Dialogue.pluralGender(this.bathroom.size(), p.getGender())) + ".");
             }
                         
             if (this.bathroom.size() == this.maxCapacity - 1) 
