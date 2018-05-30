@@ -26,7 +26,8 @@ public class ConcurrentLinkedList {
     
     private final boolean randomDelays;
     private Random randomGenerator;
-    private static final int MAX_DELAY = 1000;
+    private static final int MIN_DELAY = 100;
+    private static final int MAX_DELAY = 2000;
     
     public ConcurrentLinkedList() {
         this.head = null;
@@ -95,7 +96,8 @@ public class ConcurrentLinkedList {
         System.out.println("Removing value "+data);
         try {
             if (this.randomDelays)
-                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
+                Thread.sleep(MIN_DELAY+
+                        this.randomGenerator.nextInt(MAX_DELAY-MIN_DELAY));
             
             Node prev = null;
             Node curr = this.head;
@@ -103,6 +105,7 @@ public class ConcurrentLinkedList {
                 if (curr.getData() == data) {
                     remove(prev, curr);
                     System.out.println("Value "+data+" removed");
+                    System.out.println(this);
                     return;
                 }
 
@@ -115,8 +118,9 @@ public class ConcurrentLinkedList {
                     log(Level.SEVERE, null, ex);
         } catch (NoSuchElementException ex) {
             System.out.println("Value "+data+" not found");
-        } finally {
             System.out.println(this);
+        } finally {
+//            System.out.println(this);
             this.insertRemoveLock.unlock();
             this.searchRemoveLock.writeLock().unlock();
         }
@@ -133,25 +137,20 @@ public class ConcurrentLinkedList {
     } 
 
     // insert
-    public void insert(int data) {
-        this.insert(data, false);
-    }
-    
-    public void insert(int data, boolean hide) {
-        Node n = new Node(data);
-        this.insert(n, hide);
+    public void insertValue(int data) {
+        this.insertValue(data, false);
     }
     
     // insert
-    public void insert(Node n, boolean hide) {
+    public void insertValue(int data, boolean hide) {
         this.insertRemoveLock.lock();
-        int value = n.getData();
         if (!hide)
-            System.out.println("Inserting value "+value);
+            System.out.println("Inserting value "+data);
         try {
-            if (this.randomDelays) {
-                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
-            }
+            Node n = new Node(data);
+            if (this.randomDelays)
+                Thread.sleep(MIN_DELAY+
+                        this.randomGenerator.nextInt(MAX_DELAY-MIN_DELAY));
             if (this.length > 0)
                 this.tail.setNext(n);
             else
@@ -159,32 +158,18 @@ public class ConcurrentLinkedList {
 
             this.tail = n;
             this.length++;
-            if (!hide)
-                System.out.println("Value "+value+
+            if (!hide) {
+                System.out.println("Value "+data+
                         " inserted at position "+(this.length-1));
+                System.out.println(this);
+            }
         } catch(InterruptedException ex) {
             Logger.getLogger(ConcurrentLinkedList.class.getName()).
                     log(Level.SEVERE, null, ex);
         } finally {
-            if (!hide)
-                System.out.println(this);
+//            if (!hide)
+//                System.out.println(this);
             this.insertRemoveLock.unlock();  
-        }
-    }
-    
-    // search
-    public Node search(int data) {
-        this.searchRemoveLock.readLock().lock();
-        try {
-            Node i = this.head;
-            while(i != null) {
-                if (i.getData() == data)
-                    return i;
-                i = i.getNext();
-            }
-            return null;
-        } finally {
-            this.searchRemoveLock.readLock().unlock();
         }
     }
     
@@ -192,14 +177,15 @@ public class ConcurrentLinkedList {
         this.searchRemoveLock.readLock().lock();
         System.out.println("Searching for value "+data);
         try {
-            if (this.randomDelays) {
-                Thread.sleep(this.randomGenerator.nextInt(MAX_DELAY));
-            }
+            if (this.randomDelays)
+                Thread.sleep(MIN_DELAY+
+                        this.randomGenerator.nextInt(MAX_DELAY-MIN_DELAY));
             int pos = 0;
             Node i = this.head;
             while(i != null) {
                 if (i.getData() == data) {
                     System.out.println("Value "+data+" found at position "+pos);
+                    System.out.println(this);
                     return pos;
                 }
                 i = i.getNext();
@@ -212,65 +198,10 @@ public class ConcurrentLinkedList {
             return -1;
         } catch (NoSuchElementException ex) {
             System.out.println("Value "+data+" not found");
+            System.out.println(this);
             return -1;
         } finally {
-            System.out.println(this);
-            this.searchRemoveLock.readLock().unlock();
-        }
-    }
-    
-    // search
-    public Node getPrevious(Node n) {
-        this.searchRemoveLock.readLock().lock();
-        try {
-            Node prev = null;
-            Node curr = this.head;
-            while(curr != null) {
-                if (curr == n) {
-                    return prev;
-                }
-
-                prev = curr;
-                curr = curr.getNext();
-            }
-            return null;
-        } finally {
-            this.searchRemoveLock.readLock().unlock();
-        }
-    }
-    
-    // search
-    public Node getNodeAt(int pos) {
-        this.searchRemoveLock.readLock().lock();
-        try {
-            if (pos < 0 || pos >= this.length)
-                throw new IllegalArgumentException();
-
-            Node curr = this.head;
-            for (int i = 0; i < pos; ++i) {
-                curr = curr.getNext();
-            }
-
-            return curr;
-        } finally {
-            this.searchRemoveLock.readLock().unlock();
-        }
-    }
-    
-    // search
-    public int getPosition(Node n) {
-        this.searchRemoveLock.readLock().lock();
-        try {
-            int pos = 0;
-            Node i = this.head;
-            while(i != null) {
-                if (i == n)
-                    return pos;
-                i = i.getNext();
-                pos++;
-            }
-            throw new NoSuchElementException();
-        } finally {
+//            System.out.println(this);
             this.searchRemoveLock.readLock().unlock();
         }
     }

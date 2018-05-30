@@ -47,9 +47,9 @@ public class ConcurrentLinkedListDriver {
     public static void main(String[] args) {
         list = new ConcurrentLinkedList();
         for (int i = -MAX_VALUE; i <= MAX_VALUE; ++i) {
-            list.insert(i, true);
+            list.insertValue(i, true);
         }
         System.out.println(list);
-        test(true, true, false, 10);
+        test(true, true, true, 5);
     }
 }
