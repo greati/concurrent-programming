@@ -5,6 +5,8 @@
  */
 package matrixmultiplication;
 
+import java.util.concurrent.Executors;
+
 /**
  *
  * @author greati
@@ -17,8 +19,8 @@ public class MatrixMultiplication {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Matrix m1 = new Matrix(10,4,3, new CachedPoolMultiplier(100));
-        Matrix m2 = new Matrix(4,4,10, new SequentialMultiplier());
+        Matrix m1 = new Matrix(10,4,3, new PooledMultiplier(Executors.newCachedThreadPool()));
+        Matrix m2 = new Matrix(4,4,10);
                 
         System.out.println(m1.multiply(m2));
         
